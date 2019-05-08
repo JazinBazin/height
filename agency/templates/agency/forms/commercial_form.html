@@ -1,0 +1,6 @@
+<form name="filtersForm">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include 'agency/forms/real_estate_form.html' %}
+    {% include 'agency/forms/real_estate_form_buttons.html' %}
+</form>

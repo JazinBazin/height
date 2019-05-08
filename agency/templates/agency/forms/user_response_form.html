@@ -1,0 +1,9 @@
+<form name='adResponseForm'>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include 'agency/forms/user_basic_form.html' %}
+    <button id="usersResponseBtn" type="button" class="btn btn-primary">Откликнуться</button>
+    <div id="loadingSpinner" class="spinner-grow text-primary" role="status" hidden>
+        <span class="sr-only">Loading...</span>
+    </div>
+</form>

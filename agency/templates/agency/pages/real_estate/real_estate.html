@@ -1,0 +1,86 @@
+{% extends 'agency/basic/basic.html' %}
+{% load static %}
+{% load agency_tags %}
+{% block title %}
+<title>{{ page_title }} &mdash; Агенство недвижимости "Высота"</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'agency/css/real_estate.css' %}">
+<link rel="stylesheet" href="{% static 'agency/css/list_animation.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script src="{% static 'agency/js/axios.min.js' %}"></script>
+{% endblock styles %}
+
+{% block content %}
+{% if best_ads %}
+<h1 class="display-4 text-center mb-3">Лучшие предложения</h1>
+<div class="card-deck">
+    {% for ad in best_ads %}
+    <div class="card mb-3">
+        <a href="{% url description_page ad.id %}" target="_blank">
+            <img src="{{ ad.thumbnail.url }}" alt="real estate title image" class="card-img-top fit-image">
+        </a>
+        <div class="card-body m-0 p-0">
+            <a class="card-link" href="'{% url description_page ad.id %}" target="_blank">
+                <h5 class="card-title ml-1 mr-1 mt-2 mb-2 text-center">{{ ad.headline }}</h5>
+            </a>
+            <div class="ml-2 mr-2 mb-2 card-text">
+                {% include unique_params_template %}
+                <div class="row">
+                    <div class="col text-center">{{ ad.area.normalize }} {{ ad.get_area_units_display }}</div>
+                    <div class="col text-center">{{ ad.get_transaction_type_display }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">{{ ad.price|price_value }} {{ ad.get_currency_display }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div id="ads-list">
+    <h1 class="display-4 text-center mb-3">{{ page_title }}</h1>
+    {% include form_template with form=form %}
+    <hr>
+    <template v-if="!adsExists">
+        <p class="lead text-center">Объявления не найдены</p>
+    </template>
+    <transition-group name="list" tag="div" class="card-deck">
+        <div v-for="ad in ads" v-bind:key="ad.id" class="card mb-3">
+            <a :href="'/'+ad.id+descriptionPageURL+'/'" target="_blank">
+                <img :src="ad.thumbnail" alt="real estate title image" class="card-img-top fit-image">
+            </a>
+            <div class="card-body m-0 p-0">
+                <a class="card-link" :href="'/'+ad.id+descriptionPageURL+'/'" target="_blank">
+                    <h5 class="card-title ml-1 mr-1 mt-2 mb-2 text-center">[[ ad.headline ]]</h5>
+                </a>
+                <div class="ml-2 mr-2 mb-2 card-text">
+                    <component v-bind:is="uniqueParamsComponentName" v-bind:ad="ad"></component>
+                    <div class="row">
+                        <div class="col text-center">[[ Number.parseFloat(ad.area) ]] [[ ad.get_area_units_display
+                            ]]
+                        </div>
+                        <div class="col text-center">[[ ad.get_transaction_type_display ]]</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">[[ Number(ad.price).toLocaleString() ]] [[ ad.get_currency_display
+                ]]
+            </div>
+        </div>
+    </transition-group>
+    <div class="row justify-content-center">
+        <button v-on:click="loadAdsBtnClicked" type="button" id="loadMoreAds" class="btn btn-primary">Загрузить
+            ещё</button>
+        <div id="loadingSpinner" class="spinner-grow text-primary" role="status" hidden>
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+<script>
+    var descriptionPageURL = "{{ real_estate_description_page_url }}";
+    var realEstateListURL = "{{ real_estate_list_url }}";
+    var uniqueParamsComponentName = "{{ unique_params_component_name }}";
+</script>
+<script src="{% static 'agency/js/load_ads.js' %}"></script>
+{% endblock content %}

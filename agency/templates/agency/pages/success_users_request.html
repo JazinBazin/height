@@ -1,0 +1,17 @@
+{% extends 'agency/basic/basic.html' %}
+{% load static %}
+{% block title %}
+<title>Заявка отправлена &mdash; Агенство недвижимости "Высота"</title>
+{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'agency/css/real_estate_types.css' %}">
+{% endblock styles %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4 text-success">Ваша заявка отправлена</h1>
+        <p class="lead">В скором времени мы свяжемся с Вами, а пока Вы можете ознакомиться с нашими предложениями:</p>
+    </div>
+</div>
+{% include "agency/blocks/real_estate_types.html" %}
+{% endblock content %}

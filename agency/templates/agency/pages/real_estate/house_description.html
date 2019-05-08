@@ -1,0 +1,21 @@
+{% extends 'agency/pages/real_estate/real_estate_description.html' %}
+{% block unique_parameters %}
+<tr>
+    <td>Количество комнат:</td>
+    <td>{{ real_estate.number_of_rooms }}</td>
+</tr>
+<tr>
+    <td>Этажность:</td>
+    <td>{{ real_estate.number_of_floors }}</td>
+</tr>
+<tr>
+    <td>Тип жилья:</td>
+    <td>{{ real_estate.get_house_type_display }}</td>
+</tr>
+{% if real_estate.decoration %}
+<tr>
+    <td>Отделка:</td>
+    <td>{{ real_estate.decoration }}</td>
+</tr>
+{% endif %}
+{% endblock unique_parameters %}

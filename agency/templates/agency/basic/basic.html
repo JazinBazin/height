@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Помощь в продаже, покупке и аренде квартир, домов, дач, земельных участков, гаражей и коммерческой недвижимости. Постановка на кадастровый учет, регистрация права собственности, подготовка межевых и технических планов, разработка проектов и рабочей документации, ведение авторского надзора, получение разрешения на строительство.">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'agency/images/favicon16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'agency/images/favicon32x32.png' %}">
+    {% block title %}
+    {% endblock title %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'agency/css/basic.css' %}">
+    <link rel="stylesheet" href="{% static 'agency/css/top_menu.css' %}">
+    <link rel="stylesheet" href="{% static 'agency/css/info_line.css' %}">
+    {% block styles %}
+    {% endblock styles %}
+</head>
+
+<body>
+    <div class="container">
+        {% include 'agency/basic/top_menu.html' %}
+        {% include 'agency/basic/info_line.html' %}
+        {% block content %}
+        {% endblock content %}
+        <p class="text-center mt-3">&copy; Агенство недвижимости "Высота", 2019</p>
+    </div>
+</body>
+
+</html>

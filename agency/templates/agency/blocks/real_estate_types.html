@@ -1,0 +1,20 @@
+{% if real_estate_types %}
+<h1 class="display-4 text-center mb-3">Недвижимость</h1>
+<div class="row justify-content-center mt-3">
+    {% for real_estate_type in real_estate_types %}
+    <div class="col-12 col-sm-4 col-lg p-0">
+        <div class="card border-0">
+            <a href="{{ real_estate_type.link }}">
+                <img src="{{ real_estate_type.image.url }}" class="d-block mx-auto fluid-width"
+                    alt="real estate type image">
+            </a>
+            <div class="card-body d-flex justify-content-center">
+                <a class="lead text-center link" href="{{ real_estate_type.link }}" role="button">
+                    {{ real_estate_type.headline }}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

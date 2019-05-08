@@ -1,0 +1,42 @@
+.card-deck .card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.card-deck .card-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+}
+
+.card-deck .card-link {
+    color:black;
+}
+
+.card-deck .card-link:hover {
+    text-decoration: none;
+}
+
+.card-deck .fit-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+@media (min-width: 576px) {
+    .card-deck .card {
+        min-width: calc(50% - 30px);
+        max-width: calc(50% - 30px);
+    }
+}
+
+@media (min-width: 992px) {
+    .card-deck .card {
+        min-width: calc(33% - 30px);
+        max-width: calc(33% - 30px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-deck .card {
+        min-width: calc(25% - 30px);
+        max-width: calc(25% - 30px);
+    }
+}

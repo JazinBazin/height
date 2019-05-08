@@ -1,0 +1,17 @@
+.contacts p,
+.contacts pre {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+}
+
+@media (max-width: 768px) {
+    .contacts p,
+    .contacts pre {
+        text-align: center;
+    }
+}
+
+.contacts p:nth-child(odd) {
+    font-weight: bold;
+}

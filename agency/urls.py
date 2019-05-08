@@ -1,0 +1,35 @@
+from django.urls import path
+from . import views
+
+app_name = 'agency'
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('best_offers/', views.best_offers, name='best_offers'),
+    path('services/', views.services, name='services'),
+    path('about/', views.about, name='about'),
+    path('contacts/', views.contacts, name='contacts'),
+    path('user_response/', views.user_response, name='user_response'),
+    path('user_request/', views.user_request, name='user_request'),
+    path('success_users_request/', views.success_users_request,
+         name='success_users_request'),
+    path('apartments/', views.apartments, name='apartments'),
+    path('houses/', views.houses, name='houses'),
+    path('lands/', views.lands, name='lands'),
+    path('garages/', views.garages, name='garages'),
+    path('commercial/', views.commercial, name='commercial'),
+    path('apartments_list/', views.apartments_list, name='apartments_list'),
+    path('houses_list/', views.houses_list, name='houses_list'),
+    path('lands_list/', views.lands_list, name='lands_list'),
+    path('garages_list/', views.garages_list, name='garages_list'),
+    path('commercial_list/', views.commercial_list, name='commercial_list'),
+    path('<int:pk>apartment_description/', views.apartment_description,
+         name='apartment_description'),
+    path('<int:pk>house_description/', views.house_description,
+         name='house_description'),
+    path('<int:pk>land_description/', views.land_description,
+         name='land_description'),
+    path('<int:pk>garage_description/', views.garage_description,
+         name='garage_description'),
+    path('<int:pk>commercial_description/', views.commercial_description,
+         name='commercial_description'),
+]

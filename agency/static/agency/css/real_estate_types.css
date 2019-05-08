@@ -1,0 +1,14 @@
+.fluid-width {
+    width: 50% !important;
+}
+
+@media (max-width: 576px) {
+    .fluid-width {
+        width: 25% !important;
+    }
+}
+
+.link:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}

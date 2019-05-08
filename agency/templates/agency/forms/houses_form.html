@@ -1,0 +1,39 @@
+<form name="filtersForm">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include 'agency/forms/real_estate_form.html' %}
+    <div class="form-row">
+        <div class="col-12 col-sm-6 col-md-4 mb-2">
+            <label class="mb-0">Количество комнат:</label>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.rooms_from.errors }}
+                    {{ form.rooms_from }}
+                </div>
+                <div class="col">
+                    {{ form.rooms_to.errors }}
+                    {{ form.rooms_to }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 mb-2">
+            <label class="mb-0">Этажность:</label>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.floors_count_from.errors }}
+                    {{ form.floors_count_from }}
+                </div>
+                <div class="col">
+                    {{ form.floors_count_to.errors }}
+                    {{ form.floors_count_to }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 mb-2">
+            {{ form.house_type.label }}
+            {{ form.house_type.errors }}
+            {{ form.house_type }}
+        </div>
+    </div>
+    {% include 'agency/forms/real_estate_form_buttons.html' %}
+</form>

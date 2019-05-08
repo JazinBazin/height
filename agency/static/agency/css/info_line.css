@@ -1,0 +1,10 @@
+.info-line {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+    width: 100%;
+    max-width: 75px;
+    height: auto;
+}

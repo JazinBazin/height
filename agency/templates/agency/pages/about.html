@@ -1,0 +1,16 @@
+{% extends 'agency/basic/basic.html' %}
+{% load static %}
+{% block title %}
+<title>Об агенстве &mdash; Агенство недвижимости "Высота"</title>
+{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'agency/css/pre_style.css' %}">
+{% endblock styles %}
+{% block content %}
+<h1 class="display-4 text-center mb-3">Об агенстве</h1>
+<hr>
+{% for desctiption in descriptions %}
+<h2 class="text-center">{{ desctiption.headline }}</h2>
+<pre class="text-justify">{{ desctiption.text }}</pre>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,49 @@
+<div class="form-row">
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="mb-2">
+            {{ form.sort_type.label }}
+            {{ form.sort_type.errors }}
+            {{ form.sort_type }}
+        </div>
+        <div class="mb-2">
+            {{ form.sort_order.label }}
+            {{ form.sort_order.errors }}
+            {{ form.sort_order }}
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="mb-2">
+            <label class="mb-0">Цена:</label>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.price_from.errors }}
+                    {{ form.price_from }}
+                </div>
+                <div class="col">
+                    {{ form.price_to.errors }}
+                    {{ form.price_to }}
+                </div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="mb-0">Площадь:</label>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.area_from.errors }}
+                    {{ form.area_from }}
+                </div>
+                <div class="col">
+                    {{ form.area_to.errors }}
+                    {{ form.area_to }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="mb-2">
+            {{ form.transaction_type.label }}
+            {{ form.transaction_type.errors }}
+            {{ form.transaction_type }}
+        </div>
+    </div>
+</div>

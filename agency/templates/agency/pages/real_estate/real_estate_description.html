@@ -1,0 +1,160 @@
+{% extends 'agency/basic/basic.html' %}
+{% load static %}
+{% load agency_tags %}
+{% block title %}
+<title>{{ real_estate.headline }} &mdash; Агенство недвижимости "Высота"</title>
+{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'agency/css/real_estate_details.css' %}">
+<link rel="stylesheet" href="{% static 'agency/css/pre_style.css' %}">
+<link rel="stylesheet" href="{% static 'agency/photoswipe/photoswipe.css' %}">
+<link rel="stylesheet" href="{% static 'agency/photoswipe/default-skin/default-skin.css' %}">
+<link rel="stylesheet" href="{% static 'agency/css/pop_up.css' %}">
+<script src="{% static 'agency/photoswipe/photoswipe.min.js' %}"></script>
+<script src="{% static 'agency/photoswipe/photoswipe-ui-default.min.js' %}"></script>
+<script src="{% static 'agency/js/axios.min.js' %}"></script>
+{% endblock styles %}
+{% block content %}
+<div class="ml-2 mr-2">
+    <div class="row justify-content-center mt-3 mb-2">
+        <div>
+            <img id="title-image" class="img-fluid" src="{{ real_estate.image.url }}" alt="real estate image">
+        </div>
+    </div>
+    <div id="thumbnails" class="row justify-content-center">
+        <div id="thumbnails">
+            {% for thumbnail in real_estate.images.all %}
+            <img src="{{ thumbnail.thumbnail.url }}" alt="thumbnail image" class="img-thumbnail"
+                data-index={{ forloop.counter0 }}>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <h1 class="display-4 text-center">{{ real_estate.headline }}</h1>
+    </div>
+    <div class="row">
+        <pre class="lead text-justify">{{ real_estate.description }}</pre>
+    </div>
+    <div class="row">
+        <button id="openResponseFormBtn" type="button" class="btn btn-primary">Откликнуться</button>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Артикул:</td>
+                        <td>{{ real_estate.vendor_code }}</td>
+                    </tr>
+                    <tr>
+                        <td>Тип сделки:</td>
+                        <td>{{ real_estate.get_transaction_type_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>Цена:</td>
+                        <td>{{ real_estate.price|price_value }} {{ real_estate.get_currency_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>Общая площадь:</td>
+                        <td>{{ real_estate.area.normalize }} {{ real_estate.get_area_units_display }}</td>
+                    </tr>
+                    {% block unique_parameters %}
+                    {% endblock unique_parameters %}
+                    {% if real_estate.locality %}
+                    <tr>
+                        <td>Населённый пункт:</td>
+                        <td>{{ real_estate.locality }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if real_estate.district %}
+                    <tr>
+                        <td>Район:</td>
+                        <td>{{ real_estate.district }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if real_estate.documents %}
+                    <tr>
+                        <td>Документы:</td>
+                        <td>{{ real_estate.documents }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="popUpContainer" hidden>
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div id="popUpContent" class="col-10 col-sm-8 col-md-6 border rounded-lg pb-2 pt-2">
+                <button id="closePopUpBtn" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {% include 'agency/forms/user_response_form.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="successMessageContainer" hidden>
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div id="successMessageContent" class="col-auto border rounded-lg pb-2 pt-2">
+                <h1 class="display-4 text-success">Ваш отклик отправлен</h1>
+                <p class="lead">Мы свяжемся с Вами в ближайшее время.</p>
+                <button id="successMessageCloseBtn" type="button"
+                    class="btn btn-primary d-block mx-auto">Хорошо</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gallery-images">
+    {% for image in real_estate.images.all %}
+    <div data-image="{{ image.image.url }}" data-width={{ image.image.width }} data-height={{ image.image.height }}>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var vendorCode = "{{ real_estate.vendor_code }}";
+</script>
+<script src="{% static 'agency/js/image_gallery.js' %}"></script>
+<script src="{% static 'agency/js/users_response.js' %}"></script>
+{% endblock content %}

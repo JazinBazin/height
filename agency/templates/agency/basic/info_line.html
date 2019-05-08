@@ -1,0 +1,25 @@
+{% load static %}
+<hr class="mt-0 mb-3">
+<div class="info-line row justify-content-center align-items-center">
+    <div class="col-sm-12 col-lg-auto d-flex justify-content-center mb-3 mr-lg-3">
+        <div>
+            <a href="{% url 'agency:index' %}">
+                <img src="{% static 'agency/images/logo.png' %}" alt="logo" class="img-fluid logo">
+            </a>
+        </div>
+    </div>
+    {% if contacts %}
+    <div class="col-12 col-md-4 col-lg-auto mb-3 mr-md-3">
+        <p class="mb-2 text-center">{{ contacts.phones.distinct.0.phone }}</p>
+        <p class="mb-0 text-center">{{ contacts.phones.distinct.1.phone }}</p>
+    </div>
+    <div class="col-12 col-md-4 col-lg-auto mb-3 mr-md-3">
+        <p class="mb-2 text-center">{{ contacts.working_days_and_time }}</p>
+        <p class="mb-0 text-center">{{ contacts.address }}</p>
+    </div>
+    {% endif %}
+    <div class="col-12 col-md-4 col-lg-auto mb-3 d-flex flex-column align-items-center">
+        <a href="{% url 'agency:user_request' %}" class="btn btn-primary">Оставить заявку</a>
+    </div>
+</div>
+<hr class="mt-0 mb-2">

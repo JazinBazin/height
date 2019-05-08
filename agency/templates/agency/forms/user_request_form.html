@@ -1,0 +1,11 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% include 'agency/forms/user_basic_form.html' %}
+    <div class="form-group">
+        {{ form.users_message.label }}
+        <label id="messageErrors" class="text-danger" hidden></label>
+        {{ form.users_message }}
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>

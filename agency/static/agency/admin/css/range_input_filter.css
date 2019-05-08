@@ -1,0 +1,15 @@
+.range_input_filter {
+    padding: 0 15px 10px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.range_input_filter input {
+    width: 100%;
+}
+
+.range_input_filter button {
+    display: block;
+    margin: 0 auto;
+    padding: 3px 7px;
+    border-radius: 5px;
+}

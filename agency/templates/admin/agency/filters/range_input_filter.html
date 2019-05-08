@@ -1,0 +1,15 @@
+{% load static %}
+{% with choices.0 as choice %}
+<form method="get">
+    {% for k, v in choice.request.GET.items %}
+    {% if not k == choice.parameter_name|add:'_from' and not k == choice.parameter_name|add:'_to' %}
+    <input type="hidden" name="{{ k }}" value="{{ v }}">
+    {% endif %}
+    {% endfor %}
+    <h3>{{ title }}</h3>
+    <div class="range_input_filter">
+        {{ choice.form.as_p }}
+        <button type="submit">Применить</button>
+    </div>
+</form>
+{% endwith %}
