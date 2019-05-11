@@ -6,8 +6,8 @@ from .filters import RangeInputFilter
 from django.utils.safestring import mark_safe
 
 # admin.site.disable_action('delete_selected')
-admin.site.site_header = 'Агенство недвижимости "Высота"'
-admin.site.site_title = 'Агенство недвижимости "Высота"'
+admin.site.site_header = 'Агентство недвижимости "Высота"'
+admin.site.site_title = 'Агентство недвижимости "Высота"'
 
 
 class AdvantageAdmin(admin.ModelAdmin):
