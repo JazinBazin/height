@@ -12,7 +12,7 @@ var app = new Vue({
         realEstateListURL: realEstateListURL,
         uniqueParamsComponentName: uniqueParamsComponentName,
         offset: 0,
-        count: 1,
+        count: 8,
         adsExists: true
     },
     created() {
