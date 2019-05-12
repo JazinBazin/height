@@ -20,11 +20,11 @@ class RealEstateTypeAdmin(admin.ModelAdmin):
     list_display = ('headline', 'order_number',)
     list_editable = ['order_number', ]
 
-    # def has_add_permission(self, request):
-    #     return False
+    def has_add_permission(self, request):
+        return False
 
-    # def has_delete_permission(self, request, obj=None):
-    #     return False
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class ServiceListItemInline(admin.TabularInline):
@@ -51,11 +51,11 @@ class ContactPhoneInline(admin.StackedInline):
 class ContactAdmin(admin.ModelAdmin):
     inlines = [ContactPhoneInline]
 
-    # def has_add_permission(self, request):
-    #     return False
+    def has_add_permission(self, request):
+        return False
 
-    # def has_delete_permission(self, request, obj=None):
-    #     return False
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class RealEstateImageInline(admin.StackedInline):
