@@ -123,7 +123,8 @@ class RealEstateAdmin(admin.ModelAdmin):
     ordering = ('-last_edit_date',)
 
     def view_on_site(self, obj):
-        return '/' + str(obj.id) + obj.description_page + '/'
+        if obj.status == 'p':
+            return '/' + str(obj.id) + obj.description_page + '/'
 
     def publish(self, request, queryset):
         queryset.update(status='p')
