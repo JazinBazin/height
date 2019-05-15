@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /admin/
 Disallow: /success_users_request/
+Sitemap: https://высота-крым.рф/sitemap.xml
