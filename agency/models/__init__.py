@@ -57,7 +57,8 @@ def removeUrlFromSiteMap(pk):
 
 @receiver_with_multiple_senders(models.signals.post_delete, auto_delete_images)
 def delete_image_post_object(sender, instance, **kwargs):
-    removeUrlFromSiteMap(instance.pk)
+    if instance.status == 'p':
+        removeUrlFromSiteMap(instance.pk)
     if instance.image and os.path.isfile(instance.image.path):
         os.remove(instance.image.path)
     if hasattr(instance, 'thumbnail'):
@@ -114,7 +115,19 @@ def real_estate_pre_save(sender, instance, **kwargs):
         create_thumbnail(real_estate_thumnail_image_height,
                          instance.image, instance.thumbnail)
         return
-    old_image = sender.objects.get(pk=instance.pk).image
+
+    old_object = sender.objects.get(pk=instance.pk)
+    old_status = old_object.status
+    old_image = old_object.image
+
+    if instance.status == 'p':
+        if old_status == 'a':
+            link = 'https://высота-крым.рф/' + \
+                str(instance.pk) + instance.description_page + '/'
+            addUrlToSiteMap(link, instance.pk)
+    elif old_status == 'p':
+        removeUrlFromSiteMap(instance.pk)
+
     if old_image != instance.image:
         if os.path.isfile(old_image.path):
             os.remove(old_image.path)
@@ -129,7 +142,7 @@ def real_estate_pre_save(sender, instance, **kwargs):
 
 @receiver_with_multiple_senders(models.signals.post_save, real_estate_models)
 def real_estate_post_save(sender, instance, created, **kwargs):
-    if created == True:
+    if created == True and instance.status == 'p':
         link = 'https://высота-крым.рф/' + \
             str(instance.pk) + instance.description_page + '/'
         addUrlToSiteMap(link, instance.pk)
