@@ -125,6 +125,7 @@ def real_estate_description(request, pk, RealEstate, template_name):
 def apartments(request):
     return render(request, 'agency/pages/real_estate/real_estate.html', {
         'page_title': 'Квартиры',
+        'page_description': 'Продажа, покупка, аренда и обмен квартир. Список предложений.',
         'real_estate_description_page_url': 'apartment_description',
         'real_estate_list_url': '/apartments_list/',
         'form': forms.ApartmentsForm(),
@@ -143,6 +144,7 @@ def apartment_description(request, pk):
 def houses(request):
     return render(request, 'agency/pages/real_estate/real_estate.html', {
         'page_title': 'Дома и дачи',
+        'page_description': 'Продажа, покупка, аренда и обмен домов и дач. Список предложений.',
         'real_estate_description_page_url': 'house_description',
         'real_estate_list_url': '/houses_list/',
         'form': forms.HouseForm(),
@@ -162,6 +164,7 @@ def lands(request):
     return render(request, 'agency/pages/real_estate/real_estate.html', {
         'page_title': 'Земельные участки',
         'real_estate_description_page_url': 'land_description',
+        'page_description': 'Продажа, покупка, аренда и обмен земельных участков. Список предложений.',
         'real_estate_list_url': '/lands_list/',
         'form': forms.LandForm(),
         'form_template': forms_template_name_prefix + 'lands_form.html',
@@ -179,6 +182,7 @@ def land_description(request, pk):
 def garages(request):
     return render(request, 'agency/pages/real_estate/real_estate.html', {
         'page_title': 'Гаражи',
+        'page_description': 'Продажа, покупка, аренда и обмен гаражей. Список предложений.',
         'real_estate_description_page_url': 'garage_description',
         'real_estate_list_url': '/garages_list/',
         'form': forms.GarageForm(),
@@ -197,6 +201,7 @@ def garage_description(request, pk):
 def commercial(request):
     return render(request, 'agency/pages/real_estate/real_estate.html', {
         'page_title': 'Коммерческая недвижимость',
+        'page_description': 'Продажа, покупка, аренда и обмен коммерческой недвижимости. Список предложений.',
         'real_estate_description_page_url': 'commercial_description',
         'real_estate_list_url': '/commercial_list/',
         'form': forms.CommercialForm(),

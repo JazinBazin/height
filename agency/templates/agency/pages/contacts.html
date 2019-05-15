@@ -1,8 +1,9 @@
 {% extends 'agency/basic/basic.html' %}
 {% load static %}
-{% block title %}
+{% block title_and_description %}
 <title>Контакты &mdash; Агентство недвижимости "Высота"</title>
-{% endblock title %}
+<meta name="description" content="Контактные данные агентства недвижимости Высота.">
+{% endblock title_and_description %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/contacts.css' %}">
 {% endblock styles %}

@@ -1,9 +1,10 @@
 {% extends 'agency/basic/basic.html' %}
 {% load static %}
 {% load agency_tags %}
-{% block title %}
+{% block title_and_description %}
 <title>{{ real_estate.headline }} &mdash; Агентство недвижимости "Высота"</title>
-{% endblock title %}
+<meta name="description" content="{{ real_estate.description }}">
+{% endblock title_and_description %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/real_estate_details.css' %}">
 <link rel="stylesheet" href="{% static 'agency/css/pre_style.css' %}">
@@ -30,7 +31,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <h1 class="display-4 text-center">{{ real_estate.headline }}</h1>
+        <h2 class="display-4 text-center">{{ real_estate.headline }}</h2>
     </div>
     <div class="row">
         <pre class="lead text-justify">{{ real_estate.description }}</pre>
@@ -101,7 +102,7 @@
     <div class="container">
         <div class="row justify-content-center mt-3">
             <div id="successMessageContent" class="col-auto border rounded-lg pb-2 pt-2">
-                <h1 class="display-4 text-success">Ваш отклик отправлен</h1>
+                <h2 class="display-4 text-success">Ваш отклик отправлен</h2>
                 <p class="lead">Мы свяжемся с Вами в ближайшее время.</p>
                 <button id="successMessageCloseBtn" type="button"
                     class="btn btn-primary d-block mx-auto">Хорошо</button>

@@ -1,21 +1,24 @@
 {% extends 'agency/basic/basic.html' %}
 {% load static %}
-{% block title %}
+{% block title_and_description %}
 <title>Услуги &mdash; Агентство недвижимости "Высота"</title>
-{% endblock title %}
+<meta name="description" content="Помощь в продаже, покупке и аренде квартир, домов, дач, земельных участков, гаражей и коммерческой недвижимости.
+    Постановка на кадастровый учет, регистрация права собственности, подготовка межевых и технических планов.
+    Разработка проектов и рабочей документации, ведение авторского надзора, получение разрешения на строительство.">
+{% endblock title_and_description %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/real_estate_types.css' %}">
 <link rel="stylesheet" href="{% static 'agency/css/pre_style.css' %}">
 {% endblock styles %}
 {% block content %}
 {% include 'agency/blocks/real_estate_types.html' %}
-<h1 class="display-4 text-center mb-3">Услуги</h1>
+<h2 class="display-4 text-center mb-3">Услуги</h2>
 <div class="row">
     {% for service in services %}
     <div class="col-12 col-lg-6">
         <div class="card border-0">
             <div class="card-body">
-                <h3>{{ service.headline }}</h2d>
+                <h3>{{ service.headline }}</h3>
             </div>
             <ul class="list-group list-group-flush">
                 {% for list_item in service.list_items.all %}

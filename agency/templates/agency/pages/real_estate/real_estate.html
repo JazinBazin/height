@@ -1,9 +1,10 @@
 {% extends 'agency/basic/basic.html' %}
 {% load static %}
 {% load agency_tags %}
-{% block title %}
+{% block title_and_description %}
 <title>{{ page_title }} &mdash; Агентство недвижимости "Высота"</title>
-{% endblock title %}
+<meta name="description" content="{{ page_description }}">
+{% endblock title_and_description %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/real_estate.css' %}">
@@ -14,7 +15,7 @@
 
 {% block content %}
 {% if best_ads %}
-<h1 class="display-4 text-center mb-3">Лучшие предложения</h1>
+<h2 class="display-4 text-center mb-3">Лучшие предложения</h2>
 <div class="card-deck">
     {% for ad in best_ads %}
     <div class="card mb-3">
@@ -39,7 +40,7 @@
 </div>
 {% endif %}
 <div id="ads-list">
-    <h1 class="display-4 text-center mb-3">{{ page_title }}</h1>
+    <h2 class="display-4 text-center mb-3">{{ page_title }}</h2>
     {% include form_template with form=form %}
     <hr>
     <template v-if="!adsExists">

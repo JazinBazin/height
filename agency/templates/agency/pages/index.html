@@ -1,8 +1,11 @@
 {% extends 'agency/basic/basic.html' %}
 {% load static %}
-{% block title %}
-<title>Агентство недвижимости "Высота" </title>
-{% endblock title %}
+{% block title_and_description %}
+<title>Агентство недвижимости "Высота"</title>
+<meta name="description" content="Помощь в продаже, покупке и аренде квартир, домов, дач, земельных участков, гаражей и коммерческой недвижимости.
+    Постановка на кадастровый учет, регистрация права собственности, подготовка межевых и технических планов.
+    Разработка проектов и рабочей документации, ведение авторского надзора, получение разрешения на строительство.">
+{% endblock title_and_description %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/contacts.css' %}">
 <link rel="stylesheet" href="{% static 'agency/css/real_estate_types.css' %}">

@@ -1,14 +1,21 @@
-.fluid-width {
+.real-estate-type-image {
     width: 50% !important;
 }
 
 @media (max-width: 576px) {
-    .fluid-width {
+    .real-estate-type-image {
         width: 25% !important;
     }
 }
 
+.real-estate-type-image:hover {
+    opacity: 0.7;
+}
+
+.link {
+    font-size: 1.3rem;
+}
+
 .link:hover {
     text-decoration: none;
-    opacity: 0.8;
 }
