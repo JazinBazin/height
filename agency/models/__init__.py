@@ -1,4 +1,10 @@
 from django.db import models
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+import xml.etree.ElementTree as ET
+
 from .advantage import Advantage
 from .real_estate_type import RealEstateType
 from .real_estate import RealEstate, RealEstateImage
@@ -11,17 +17,16 @@ from .contact import Contact, ContactPhone
 from .service import Service, ServiceListItem
 from .description import Description
 
-from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
-import os
-
 auto_delete_images = (Advantage, RealEstateType, RealEstate, RealEstateImage)
 real_estate_models = (Apartment, House, Garage, Land, Commercial)
 models_with_image = (Advantage, RealEstateType)
 real_estate_title_image_height = 480
 real_estate_thumnail_image_height = 200
 default_image_height = 256
+
+ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
+tree = ET.parse('sitemap.xml')
+urlset = tree.getroot()
 
 
 def receiver_with_multiple_senders(signal, senders, **kwargs):
@@ -32,8 +37,27 @@ def receiver_with_multiple_senders(signal, senders, **kwargs):
     return decorator
 
 
+def addUrlToSiteMap(link, pk):
+    url = ET.SubElement(urlset, 'url', attrib={
+        'pk': str(pk),
+    })
+    loc = ET.SubElement(url, 'loc')
+    loc.text = link
+    tree.write('sitemap.xml', encoding='UTF-8', xml_declaration=True)
+
+
+def removeUrlFromSiteMap(pk):
+    pk = str(pk)
+    for url in urlset:
+        if url.get('pk', -1) == pk:
+            urlset.remove(url)
+            break
+    tree.write('sitemap.xml', encoding='UTF-8', xml_declaration=True)
+
+
 @receiver_with_multiple_senders(models.signals.post_delete, auto_delete_images)
 def delete_image_post_object(sender, instance, **kwargs):
+    removeUrlFromSiteMap(instance.pk)
     if instance.image and os.path.isfile(instance.image.path):
         os.remove(instance.image.path)
     if hasattr(instance, 'thumbnail'):
@@ -101,3 +125,11 @@ def real_estate_pre_save(sender, instance, **kwargs):
                          instance.image, instance.image)
         create_thumbnail(real_estate_thumnail_image_height,
                          instance.image, instance.thumbnail)
+
+
+@receiver_with_multiple_senders(models.signals.post_save, real_estate_models)
+def real_estate_post_save(sender, instance, created, **kwargs):
+    if created == True:
+        link = 'https://высота-крым.рф/' + \
+            str(instance.pk) + instance.description_page + '/'
+        addUrlToSiteMap(link, instance.pk)
