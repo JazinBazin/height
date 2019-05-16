@@ -15,15 +15,15 @@
 <h2 class="display-4 text-center mb-3">Услуги</h2>
 <div class="row">
     {% for service in services %}
-    <div class="col-12 col-lg-6">
+    <div class="col-12">
         <div class="card border-0">
             <div class="card-body">
                 <h3>{{ service.headline }}</h3>
             </div>
             <ul class="list-group list-group-flush">
                 {% for list_item in service.list_items.all %}
-                <li class="list-group-item">
-                    <pre>{{ list_item.text }}</pre>
+                <li>
+                    <pre class="text-justify">{{ list_item.text }}</pre>
                 </li>
                 {% endfor %}
             </ul>
