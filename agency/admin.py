@@ -15,6 +15,11 @@ class AdvantageAdmin(admin.ModelAdmin):
     list_editable = ['order_number', ]
 
 
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ('headline', 'order_number',)
+    list_editable = ['order_number', ]
+
+
 class RealEstateTypeAdmin(admin.ModelAdmin):
     exclude = ['link']
     list_display = ('headline', 'order_number',)
@@ -213,3 +218,4 @@ admin.site.register(models.Commercial, CommercialAdmin)
 admin.site.register(models.Contact, ContactAdmin)
 admin.site.register(models.Service, ServiceAdmin)
 admin.site.register(models.Description, DescriptionAdmin)
+admin.site.register(models.Certificate, CertificateAdmin)

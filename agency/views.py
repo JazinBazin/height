@@ -10,7 +10,6 @@ def index(request):
     return render(request, 'agency/pages/index.html', {
         'advantages': models.Advantage.objects.all(),
         'real_estate_types': models.RealEstateType.objects.all(),
-        # 'contacts': models.Contact.objects.first(),
     })
 
 
@@ -24,13 +23,12 @@ def services(request):
 def about(request):
     return render(request, 'agency/pages/about.html', {
         'descriptions': models.Description.objects.all(),
+        'certificates': models.Certificate.objects.all(),
     })
 
 
 def contacts(request):
-    return render(request, 'agency/pages/contacts.html', {
-        # 'contacts': models.Contact.objects.first(),
-    })
+    return render(request, 'agency/pages/contacts.html', {})
 
 
 def user_request(request):

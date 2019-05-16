@@ -1,0 +1,20 @@
+@media (min-width: 576px) {
+    #certificates .card {
+        min-width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+}
+
+@media (min-width: 768px) {
+    #certificates .card {
+        min-width: calc(50% - 30px);
+        max-width: calc(50% - 30px);
+    }
+}
+
+@media (min-width: 992px) {
+    #certificates .card {
+        min-width: calc(33% - 30px);
+        max-width: calc(33% - 30px);
+    }
+}

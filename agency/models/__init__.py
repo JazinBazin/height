@@ -16,10 +16,13 @@ from .commercial import Commercial
 from .contact import Contact, ContactPhone
 from .service import Service, ServiceListItem
 from .description import Description
+from .certificate import Certificate
 
-auto_delete_images = (Advantage, RealEstateType, RealEstate, RealEstateImage)
+models_with_image = (RealEstate, RealEstateType,
+                     RealEstateImage, Advantage, Certificate)
 real_estate_models = (Apartment, House, Garage, Land, Commercial)
-models_with_image = (Advantage, RealEstateType)
+models_with_default_image_height = (Advantage, RealEstateType)
+
 real_estate_title_image_height = 480
 real_estate_thumnail_image_height = 200
 default_image_height = 256
@@ -55,10 +58,16 @@ def removeUrlFromSiteMap(pk):
     tree.write('sitemap.xml', encoding='UTF-8', xml_declaration=True)
 
 
-@receiver_with_multiple_senders(models.signals.post_delete, auto_delete_images)
-def delete_image_post_object(sender, instance, **kwargs):
+def remove_from_site_map(sender, instance, **kwargs):
     if instance.status == 'p':
         removeUrlFromSiteMap(instance.pk)
+
+
+models.signals.post_delete.connect(remove_from_site_map, sender=RealEstate)
+
+
+@receiver_with_multiple_senders(models.signals.post_delete, models_with_image)
+def delete_image_post_object(sender, instance, **kwargs):
     if instance.image and os.path.isfile(instance.image.path):
         os.remove(instance.image.path)
     if hasattr(instance, 'thumbnail'):
@@ -95,7 +104,7 @@ models.signals.pre_save.connect(
     real_estate_image_pre_save, sender=RealEstateImage)
 
 
-@receiver_with_multiple_senders(models.signals.pre_save, models_with_image)
+@receiver_with_multiple_senders(models.signals.pre_save, models_with_default_image_height)
 def models_with_image_pre_save(sender, instance, **kwargs):
     if not instance.pk:
         create_thumbnail(default_image_height, instance.image, instance.image)

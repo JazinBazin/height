@@ -1,0 +1,15 @@
+{% if certificates %}
+<div id="certificates" class="card-deck">
+    {% for certificate in certificates %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{{ certificate.headline }}</h3>
+            <p class="card-text">{{ certificate.text }}</p>
+        </div>
+        <div class="card-footer d-flex flex-column align-items-center">
+            <a class="btn btn-primary" href="{{ certificate.image.url }}" target="_blank" role="button">Открыть</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

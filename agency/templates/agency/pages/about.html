@@ -6,10 +6,12 @@
 {% endblock title_and_description %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'agency/css/pre_style.css' %}">
+<link rel="stylesheet" href="{% static 'agency/css/certificates.css' %}">
 {% endblock styles %}
 {% block content %}
 <h1 class="display-4 text-center mb-3">Об агентстве</h1>
 <hr>
+{% include 'agency/blocks/certificates.html' %}
 {% for desctiption in descriptions %}
 <h2 class="text-center">{{ desctiption.headline }}</h2>
 <pre class="text-justify">{{ desctiption.text }}</pre>
