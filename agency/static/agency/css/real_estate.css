@@ -1,41 +1,41 @@
-#ads-list .card-deck .card:hover {
+.real-estate-cards .card:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-#ads-list .card-deck .card-text {
+.real-estate-cards .card-text {
     font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
 }
 
-#ads-list .card-deck .card-link {
+.real-estate-cards .card-link {
     color:black;
 }
 
-#ads-list .card-deck .card-link:hover {
+.real-estate-cards .card-link:hover {
     text-decoration: none;
 }
 
-#ads-list .card-deck .fit-image {
+.real-estate-cards .fit-image {
     height: 200px;
     object-fit: cover;
 }
 
 @media (min-width: 576px) {
-    #ads-list .card-deck .card {
+    .real-estate-cards .card {
         min-width: calc(50% - 30px);
         max-width: calc(50% - 30px);
     }
 }
 
 @media (min-width: 992px) {
-    #ads-list .card-deck .card {
+    .real-estate-cards .card {
         min-width: calc(33% - 30px);
         max-width: calc(33% - 30px);
     }
 }
 
 @media (min-width: 1200px) {
-    #ads-list .card-deck .card {
+    .real-estate-cards .card {
         min-width: calc(25% - 30px);
         max-width: calc(25% - 30px);
     }

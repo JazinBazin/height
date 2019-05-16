@@ -16,7 +16,7 @@
 {% block content %}
 {% if best_ads %}
 <h2 class="display-4 text-center mb-3">Лучшие предложения</h2>
-<div class="card-deck">
+<div class="card-deck real-estate-cards">
     {% for ad in best_ads %}
     <div class="card mb-3">
         <a href="{% url description_page ad.id %}" target="_blank">
@@ -46,7 +46,7 @@
     <template v-if="!adsExists">
         <p class="lead text-center">Объявления не найдены</p>
     </template>
-    <transition-group name="list" tag="div" class="card-deck">
+    <transition-group name="list" tag="div" class="card-deck real-estate-cards">
         <div v-for="ad in ads" v-bind:key="ad.id" class="card mb-3">
             <a :href="'/'+ad.id+descriptionPageURL+'/'" target="_blank">
                 <img :src="ad.thumbnail" alt="real estate title image" class="card-img-top fit-image">
