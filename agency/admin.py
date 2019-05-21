@@ -83,10 +83,11 @@ class RealEstateImageInline(admin.StackedInline):
     thumbnail_image.short_description = 'Изображение'
 
 
-basic_required_fields = ('headline', 'image', 'description', 'vendor_code',
+basic_required_fields = ('headline', 'image', 'description', 'district',
+                         'populated_area', 'vendor_code',
                          'transaction_type', 'price', 'currency', 'area',
                          'area_units', 'address', 'phone')
-basic_optional_fields = ('locality', 'district', 'documents',)
+basic_optional_fields = ('documents',)
 basic_list_filters = (('status', admin.ChoicesFieldListFilter),
                       ('is_best_offer', admin.BooleanFieldListFilter),
                       ('transaction_type', admin.ChoicesFieldListFilter),
@@ -219,3 +220,5 @@ admin.site.register(models.Contact, ContactAdmin)
 admin.site.register(models.Service, ServiceAdmin)
 admin.site.register(models.Description, DescriptionAdmin)
 admin.site.register(models.Certificate, CertificateAdmin)
+admin.site.register(models.District)
+admin.site.register(models.PopulatedArea)

@@ -1,4 +1,5 @@
 from django import forms
+from agency import models
 
 
 class RealEstateFiltersForm(forms.Form):
@@ -69,6 +70,22 @@ class RealEstateFiltersForm(forms.Form):
         })
     )
 
+    district = forms.ModelChoiceField(
+        queryset=models.District.objects.all(),
+        empty_label='Не выбран',
+        to_field_name='name',
+        label='Район:',
+        required=False,
+    )
+
+    populated_area = forms.ModelChoiceField(
+        queryset=models.PopulatedArea.objects.all(),
+        empty_label='Не выбран',
+        to_field_name='name',
+        label='Населённый пункт',
+        required=False,
+    )
+
     def filter(self, RealEstate):
         real_estate = RealEstate.objects.filter(status='p')
 
@@ -87,6 +104,23 @@ class RealEstateFiltersForm(forms.Form):
         if self.cleaned_data['transaction_type'] != 'a':
             real_estate = real_estate.filter(
                 transaction_type=self.cleaned_data['transaction_type'])
+
+        district = self.cleaned_data['district']
+        populated_area = self.cleaned_data['populated_area']
+        if populated_area:
+            if populated_area.is_city:
+                real_estate = real_estate.filter(
+                    populated_area=populated_area)
+            elif district:
+                real_estate = real_estate.filter(
+                    populated_area=populated_area,
+                    district=district
+                )
+        elif district:
+            real_estate = real_estate.filter(
+                district=district
+            )
+
         if self.cleaned_data['sort_type'] != 'n':
             if self.cleaned_data['sort_order'] == 'a':
                 real_estate = real_estate.order_by(

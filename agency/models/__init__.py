@@ -5,6 +5,8 @@ from django.core.files.base import ContentFile
 import os
 import xml.etree.ElementTree as ET
 
+from .district import District
+from .populated_area import PopulatedArea
 from .advantage import Advantage
 from .real_estate_type import RealEstateType
 from .real_estate import RealEstate, RealEstateImage

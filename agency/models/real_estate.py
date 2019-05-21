@@ -1,5 +1,5 @@
 from django.db import models
-
+from . import District, PopulatedArea
 
 class RealEstate(models.Model):
 
@@ -58,17 +58,21 @@ class RealEstate(models.Model):
         default='p'
     )
 
-    locality = models.CharField(
-        'Населённый пункт',
-        max_length=100,
-        blank=True
-    )
+    # district = models.ForeignKey(
+    #     District,
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     blank=True,
+    #     verbose_name='Район',
+    # )
 
-    district = models.CharField(
-        'Район',
-        max_length=100,
-        blank=True
-    )
+    # populated_area = models.ForeignKey(
+    #     PopulatedArea,
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     blank=True,
+    #     verbose_name='Населённый пункт',
+    # )
 
     address = models.CharField(
         'Адрес',
