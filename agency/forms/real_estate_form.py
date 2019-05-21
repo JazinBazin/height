@@ -110,7 +110,7 @@ class RealEstateFiltersForm(forms.Form):
         district = self.cleaned_data['district']
         populated_area = self.cleaned_data['populated_area']
         if populated_area:
-            if populated_area.is_city:
+            if populated_area.is_city or district is None:
                 real_estate = real_estate.filter(
                     populated_area=populated_area)
             elif district:
@@ -118,6 +118,7 @@ class RealEstateFiltersForm(forms.Form):
                     populated_area=populated_area,
                     district=district
                 )
+
         elif district:
             real_estate = real_estate.filter(
                 district=district
