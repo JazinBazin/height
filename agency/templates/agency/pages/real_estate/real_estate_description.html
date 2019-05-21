@@ -61,16 +61,16 @@
                     </tr>
                     {% block unique_parameters %}
                     {% endblock unique_parameters %}
-                    {% if real_estate.locality %}
-                    <tr>
-                        <td>Населённый пункт:</td>
-                        <td>{{ real_estate.locality }}</td>
-                    </tr>
-                    {% endif %}
-                    {% if real_estate.district %}
+                    {% if real_estate.district.name %}
                     <tr>
                         <td>Район:</td>
                         <td>{{ real_estate.district }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if real_estate.populated_area %}
+                    <tr>
+                        <td>Населённый пункт:</td>
+                        <td>{{ real_estate.populated_area.name }}</td>
                     </tr>
                     {% endif %}
                     {% if real_estate.documents %}
