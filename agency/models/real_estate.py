@@ -58,21 +58,21 @@ class RealEstate(models.Model):
         default='p'
     )
 
-    # district = models.ForeignKey(
-    #     District,
-    #     on_delete=models.SET_NULL,
-    #     null=True,
-    #     blank=True,
-    #     verbose_name='Район',
-    # )
+    district = models.ForeignKey(
+        District,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Район',
+    )
 
-    # populated_area = models.ForeignKey(
-    #     PopulatedArea,
-    #     on_delete=models.SET_NULL,
-    #     null=True,
-    #     blank=True,
-    #     verbose_name='Населённый пункт',
-    # )
+    populated_area = models.ForeignKey(
+        PopulatedArea,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Населённый пункт',
+    )
 
     address = models.CharField(
         'Адрес',

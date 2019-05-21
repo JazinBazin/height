@@ -76,14 +76,16 @@ class RealEstateFiltersForm(forms.Form):
         to_field_name='name',
         label='Район:',
         required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
     )
 
     populated_area = forms.ModelChoiceField(
         queryset=models.PopulatedArea.objects.all(),
         empty_label='Не выбран',
         to_field_name='name',
-        label='Населённый пункт',
+        label='Населённый пункт:',
         required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
     )
 
     def filter(self, RealEstate):

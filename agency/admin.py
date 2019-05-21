@@ -83,16 +83,18 @@ class RealEstateImageInline(admin.StackedInline):
     thumbnail_image.short_description = 'Изображение'
 
 
-basic_required_fields = ('headline', 'image', 'description', 'district',
-                         'populated_area', 'vendor_code',
-                         'transaction_type', 'price', 'currency', 'area',
-                         'area_units', 'address', 'phone')
+basic_required_fields = ('headline', 'image', 'description', 'vendor_code',
+                         'district', 'populated_area', 'transaction_type',
+                         'price', 'currency', 'area', 'area_units',
+                         'address', 'phone')
 basic_optional_fields = ('documents',)
 basic_list_filters = (('status', admin.ChoicesFieldListFilter),
                       ('is_best_offer', admin.BooleanFieldListFilter),
                       ('transaction_type', admin.ChoicesFieldListFilter),
                       ('price', RangeInputFilter),
-                      ('area', RangeInputFilter))
+                      ('area', RangeInputFilter),
+                      ('district', admin.RelatedOnlyFieldListFilter),
+                      ('populated_area', admin.RelatedOnlyFieldListFilter))
 
 
 class RealEstateAdmin(admin.ModelAdmin):
@@ -160,7 +162,9 @@ class ApartmentAdmin(RealEstateAdmin):
                                         ('floor_number', RangeInputFilter),
                                         ('number_of_floors', RangeInputFilter),
                                         ('balcony', admin.BooleanFieldListFilter),
-                                        ('bathroom', admin.ChoicesFieldListFilter))
+                                        ('bathroom', admin.ChoicesFieldListFilter),
+                                        ('district', admin.RelatedOnlyFieldListFilter),
+                                        ('populated_area', admin.RelatedOnlyFieldListFilter))
 
     fieldsets = (
         (None, {
@@ -178,7 +182,9 @@ class ApartmentAdmin(RealEstateAdmin):
 class HouseAdmin(RealEstateAdmin):
     list_filter = basic_list_filters + (('number_of_rooms', RangeInputFilter),
                                         ('number_of_floors', RangeInputFilter),
-                                        ('house_type', admin.ChoicesFieldListFilter),)
+                                        ('house_type', admin.ChoicesFieldListFilter),
+                                        ('district', admin.RelatedOnlyFieldListFilter),
+                                        ('populated_area', admin.RelatedOnlyFieldListFilter))
 
     fieldsets = (
         (None, {
@@ -195,7 +201,9 @@ class HouseAdmin(RealEstateAdmin):
 
 class CommercialAdmin(RealEstateAdmin):
     list_filter = basic_list_filters + \
-        (('commercial_type', admin.AllValuesFieldListFilter),)
+        (('commercial_type', admin.AllValuesFieldListFilter),
+         ('district', admin.RelatedOnlyFieldListFilter),
+         ('populated_area', admin.RelatedOnlyFieldListFilter))
     fieldsets = (
         (None, {
             'fields': basic_required_fields + ('commercial_type', 'status', 'is_best_offer',)
