@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 from agency import models
 
 
@@ -109,16 +110,18 @@ class RealEstateFiltersForm(forms.Form):
 
         district = self.cleaned_data['district']
         populated_area = self.cleaned_data['populated_area']
+
         if populated_area:
-            if populated_area.is_city or district is None:
+            if district:
+                if populated_area.is_city:
+                    real_estate = real_estate.filter(
+                        Q(populated_area=populated_area) | Q(district=district))
+                else:
+                    real_estate = real_estate.filter(
+                        populated_area=populated_area, district=district)
+            else:
                 real_estate = real_estate.filter(
                     populated_area=populated_area)
-            elif district:
-                real_estate = real_estate.filter(
-                    populated_area=populated_area,
-                    district=district
-                )
-
         elif district:
             real_estate = real_estate.filter(
                 district=district
