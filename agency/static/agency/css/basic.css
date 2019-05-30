@@ -1,4 +1,8 @@
 
+body {
+    background: white url('/static/agency/images/cream_pixels.png');
+}
+
 .transparent-background {
     background-color: transparent;
 }
