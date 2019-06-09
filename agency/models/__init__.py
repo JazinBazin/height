@@ -30,8 +30,8 @@ real_estate_thumnail_image_height = 200
 default_image_height = 256
 
 ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
-tree = ET.parse('sitemap.xml')
-urlset = tree.getroot()
+# tree = ET.parse('sitemap.xml')
+# urlset = tree.getroot()
 
 
 def receiver_with_multiple_senders(signal, senders, **kwargs):
@@ -43,6 +43,8 @@ def receiver_with_multiple_senders(signal, senders, **kwargs):
 
 
 def addUrlToSiteMap(link, pk):
+    tree = ET.parse('sitemap.xml')
+    urlset = tree.getroot()
     url = ET.SubElement(urlset, 'url', attrib={
         'pk': str(pk),
     })
@@ -53,6 +55,8 @@ def addUrlToSiteMap(link, pk):
 
 def removeUrlFromSiteMap(pk):
     pk = str(pk)
+    tree = ET.parse('sitemap.xml')
+    urlset = tree.getroot()
     for url in urlset:
         if url.get('pk', -1) == pk:
             urlset.remove(url)
