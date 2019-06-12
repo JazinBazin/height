@@ -72,7 +72,7 @@ class RealEstateFiltersForm(forms.Form):
     )
 
     district = forms.ModelChoiceField(
-        queryset=models.District.objects.all(),
+        queryset=None,
         empty_label='Все',
         to_field_name='name',
         label='Район:',
@@ -81,7 +81,7 @@ class RealEstateFiltersForm(forms.Form):
     )
 
     populated_area = forms.ModelChoiceField(
-        queryset=models.PopulatedArea.objects.all(),
+        queryset=None,
         empty_label='Все',
         to_field_name='name',
         label='Населённый пункт:',

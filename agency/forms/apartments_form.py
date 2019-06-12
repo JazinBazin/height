@@ -1,9 +1,29 @@
 from django import forms
 from .real_estate_form import RealEstateFiltersForm
-from agency.models import Apartment
+from agency import models
 
 
 class ApartmentsForm(RealEstateFiltersForm):
+
+    district = forms.ModelChoiceField(
+        queryset=models.District.objects.filter(id__in=(
+            estate.district.id for estate in models.Apartment.objects.exclude(district=None))).order_by('name'),
+        empty_label='Все',
+        to_field_name='name',
+        label='Район:',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    populated_area = forms.ModelChoiceField(
+        queryset=models.PopulatedArea.objects.filter(id__in=(
+            estate.populated_area.id for estate in models.Apartment.objects.exclude(populated_area=None))).order_by('name'),
+        empty_label='Все',
+        to_field_name='name',
+        label='Населённый пункт:',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     rooms_from = forms.IntegerField(
         required=False,
@@ -80,7 +100,7 @@ class ApartmentsForm(RealEstateFiltersForm):
     )
 
     def filter(self):
-        apartments = super().filter(Apartment)
+        apartments = super().filter(models.Apartment)
 
         if self.cleaned_data['rooms_from']:
             apartments = apartments.filter(
