@@ -2,18 +2,20 @@
 <div id="best-offers">
     <template v-if="bestOffers.length != 0">
         <h2 class="display-4 text-center mb-3">Лучшие предложения</h2>
-        <div class="row justify-content-center">
-            <div v-for="(bestOffer, index) in bestOffers" class="col-auto mb-3">
-                <button v-if="index == 0" v-bind:id="'btnOpenTab'+index" type="button"
-                    class="btn btn-primary btn-sm focus" v-bind:data-index="index" v-on:click="showOffers">
-                    [[ bestOffer.verbose_tab_name ]]
-                </button>
-                <button v-else="index == 0" v-bind:id="'btnOpenTab'+index" type="button" class="btn btn-primary btn-sm"
-                    v-bind:data-index="index" v-on:click="showOffers">
-                    [[ bestOffer.verbose_tab_name ]]
-                </button>
+        <template v-if="bestOffers.length > 1">
+            <div class="row justify-content-center">
+                <div v-for="(bestOffer, index) in bestOffers" class="col-auto mb-3">
+                    <button v-if="index == 0" v-bind:id="'btnOpenTab'+index" type="button"
+                        class="btn btn-primary btn-sm focus" v-bind:data-index="index" v-on:click="showOffers">
+                        [[ bestOffer.verbose_tab_name ]]
+                    </button>
+                    <button v-else="index == 0" v-bind:id="'btnOpenTab'+index" type="button"
+                        class="btn btn-primary btn-sm" v-bind:data-index="index" v-on:click="showOffers">
+                        [[ bestOffer.verbose_tab_name ]]
+                    </button>
+                </div>
             </div>
-        </div>
+        </template>
         <div class="card-deck real-estate-cards">
             <div v-for="ad in adsToShow" class="card mb-3">
                 <a :href="'/'+ad.id+descriptionPageURL+'/'" target="_blank">
