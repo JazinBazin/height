@@ -111,8 +111,7 @@ class RealEstateAdmin(admin.ModelAdmin):
     exclude = ['thumbnail']
     list_filter = basic_list_filters
     list_per_page = 10
-    actions = ['publish', 'archive',
-               'add_to_best_offers', 'remove_from_best_offers']
+    actions = ['add_to_best_offers', 'remove_from_best_offers']
     formfield_overrides = {
         db.models.PositiveIntegerField: {'widget': forms.NumberInput},
     }
@@ -133,11 +132,12 @@ class RealEstateAdmin(admin.ModelAdmin):
         if obj.status == 'p':
             return '/' + str(obj.id) + obj.description_page + '/'
 
-    def publish(self, request, queryset):
-        queryset.update(status='p')
+    # Баг. Данные методы не посылают сигнал pre_save. Следовательно sitemap не обновляется
+    # def publish(self, request, queryset):
+    #     queryset.update(status='p')
 
-    def archive(self, request, queryset):
-        queryset.update(status='a')
+    # def archive(self, request, queryset):
+    #     queryset.update(status='a')
 
     def add_to_best_offers(self, request, queryset):
         queryset.update(is_best_offer=True)
@@ -145,8 +145,8 @@ class RealEstateAdmin(admin.ModelAdmin):
     def remove_from_best_offers(self, request, queryset):
         queryset.update(is_best_offer=False)
 
-    publish.short_description = 'Опубликовать'
-    archive.short_description = 'Архивировать'
+    # publish.short_description = 'Опубликовать'
+    # archive.short_description = 'Архивировать'
     add_to_best_offers.short_description = 'Добавить в \"Лучшие предложения\"'
     remove_from_best_offers.short_description = 'Удалить из \"Лучших предложений\"'
 
