@@ -35,6 +35,27 @@
         <div><img src="https://mc.yandex.ru/watch/53613256" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+    <script type='text/javascript'>
+        (function () {
+            window['yandexChatWidgetCallback'] = function () {
+                try {
+                    window.yandexChatWidget = new Ya.ChatWidget({
+                        guid: '5c69c39e-c4b0-48d7-8e46-7a3c004e79f2',
+                        buttonText: 'Есть вопросы?',
+                        title: 'Чат',
+                        theme: 'light',
+                        collapsedDesktop: 'never',
+                        collapsedTouch: 'always'
+                    });
+                } catch (e) { }
+            };
+            var n = document.getElementsByTagName('script')[0],
+                s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://chat.s3.yandex.net/widget.js';
+            n.parentNode.insertBefore(s, n);
+        })();
+    </script>
     <meta name="yandex-verification" content="f935e5e7c555d134" />
     <meta name="google-site-verification" content="qRXEWl_k1z5Xtiimb030tcPtX_crbtlrTlrKVyNRNQM" />
     <meta name='wmail-verification' content='da8f44990c9bd532b7e733bd5f4267a9' />
