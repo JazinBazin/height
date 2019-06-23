@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
+
 def add_lot_offer(instance):
     if instance.transaction_type == 'e':
         return
@@ -14,7 +15,8 @@ def add_lot_offer(instance):
         tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
     except:
         log_file = open('log.txt', 'a')
-        log_file.write('error in function add_lot_offer. pk = ' + str(instance.pk))
+        log_file.write('error in function add_lot_offer. pk = ' +
+                       str(instance.pk) + '\n')
         log_file.close()
 
 
@@ -33,7 +35,8 @@ def remove_lot_offer(pk):
         tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
     except:
         log_file = open('log.txt', 'a')
-        log_file.write('error in function remove_lot_offer. pk = ' + str(pk) + '\n')
+        log_file.write(
+            'error in function remove_lot_offer. pk = ' + str(pk) + '\n')
         log_file.close()
 
 
@@ -60,7 +63,8 @@ def create_lot_offer(feed, instance):
     property_type = ET.SubElement(offer, 'property-type')
     property_type.text = 'участок'
     lot_url = ET.SubElement(offer, 'url')
-    lot_url.text = 'https://высота-крым.рф/' + str(instance.pk) + 'land_description/'
+    lot_url.text = 'https://высота-крым.рф/' + \
+        str(instance.pk) + 'land_description/'
     creation_date = ET.SubElement(offer, 'creation-date')
     creation_date.text = datetime.now().replace(
         microsecond=0).isoformat(sep='T') + '+03:00'
