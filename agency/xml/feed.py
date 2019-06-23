@@ -118,7 +118,7 @@ def create_lot_offer(feed, instance):
         lot_area_unit.text = 'cотка'
     # lot_type = ET.SubElement(offer, 'lot-type')
     # lot_type.text = 'ИЖС'
-    lot_image = ET.SubElement(offer, 'lot-image')
-    lot_image.text = 'https://высота-крым.рф/media/agency/images/real_estate_titles/IMG-35a6fa6b68e32d3575a20a18f37ae24b-V.jpg'
+    lot_image = ET.SubElement(offer, 'image')
+    lot_image.text = 'https://высота-крым.рф' + str(instance.image.url)
     description = ET.SubElement(offer, 'description')
     description.text = instance.description
