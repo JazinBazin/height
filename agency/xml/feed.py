@@ -33,7 +33,7 @@ def remove_lot_offer(pk):
         tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
     except:
         log_file = open('log.txt', 'a')
-        log_file.write('error in function remove_lot_offer. pk = ' + str(pk))
+        log_file.write('error in function remove_lot_offer. pk = ' + str(pk) + '\n')
         log_file.close()
 
 
