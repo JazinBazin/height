@@ -3,7 +3,7 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
 import os
-import xml.etree.ElementTree as ET
+import agency.xml
 
 from .district import District
 from .populated_area import PopulatedArea
@@ -29,9 +29,16 @@ real_estate_title_image_height = 480
 real_estate_thumnail_image_height = 200
 default_image_height = 256
 
-ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
-# tree = ET.parse('sitemap.xml')
-# urlset = tree.getroot()
+
+def remove_from_xml(sender, instance, **kwargs):
+    if instance.status == 'p':
+        agency.xml.removeUrlFromSiteMap(instance.pk)
+        # Here only RealEstate model
+        # change to receiver_with_multiple_senders and add "if isinstance(instance, Land):"
+        agency.xml.remove_lot_offer(instance.pk)
+
+
+models.signals.post_delete.connect(remove_from_xml, sender=RealEstate)
 
 
 def receiver_with_multiple_senders(signal, senders, **kwargs):
@@ -40,36 +47,6 @@ def receiver_with_multiple_senders(signal, senders, **kwargs):
             signal.connect(receiver_function, sender=sender, **kwargs)
         return receiver_function
     return decorator
-
-
-def addUrlToSiteMap(link, pk):
-    tree = ET.parse('sitemap.xml')
-    urlset = tree.getroot()
-    url = ET.SubElement(urlset, 'url', attrib={
-        'pk': str(pk),
-    })
-    loc = ET.SubElement(url, 'loc')
-    loc.text = link
-    tree.write('sitemap.xml', encoding='UTF-8', xml_declaration=True)
-
-
-def removeUrlFromSiteMap(pk):
-    pk = str(pk)
-    tree = ET.parse('sitemap.xml')
-    urlset = tree.getroot()
-    for url in urlset:
-        if url.get('pk', -1) == pk:
-            urlset.remove(url)
-            break
-    tree.write('sitemap.xml', encoding='UTF-8', xml_declaration=True)
-
-
-def remove_from_site_map(sender, instance, **kwargs):
-    if instance.status == 'p':
-        removeUrlFromSiteMap(instance.pk)
-
-
-models.signals.post_delete.connect(remove_from_site_map, sender=RealEstate)
 
 
 @receiver_with_multiple_senders(models.signals.post_delete, models_with_image)
@@ -139,9 +116,13 @@ def real_estate_pre_save(sender, instance, **kwargs):
         if old_status == 'a':
             link = 'https://высота-крым.рф/' + \
                 str(instance.pk) + instance.description_page + '/'
-            addUrlToSiteMap(link, instance.pk)
+            agency.xml.addUrlToSiteMap(link, instance.pk)
+            if isinstance(instance, Land):
+                agency.xml.add_lot_offer(instance)
     elif old_status == 'p':
-        removeUrlFromSiteMap(instance.pk)
+        agency.xml.removeUrlFromSiteMap(instance.pk)
+        if isinstance(instance, Land):
+            agency.xml.remove_lot_offer(instance.pk)
 
     if old_image != instance.image:
         if os.path.isfile(old_image.path):
@@ -160,4 +141,6 @@ def real_estate_post_save(sender, instance, created, **kwargs):
     if created == True and instance.status == 'p':
         link = 'https://высота-крым.рф/' + \
             str(instance.pk) + instance.description_page + '/'
-        addUrlToSiteMap(link, instance.pk)
+        agency.xml.addUrlToSiteMap(link, instance.pk)
+        if isinstance(instance, Land):
+            agency.xml.add_lot_offer(instance)

@@ -1,3 +1,4 @@
+from django.db import models
 from .real_estate import RealEstate
 
 

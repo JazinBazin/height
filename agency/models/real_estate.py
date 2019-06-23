@@ -109,7 +109,8 @@ class RealEstate(models.Model):
         max_length=1,
         choices=(
             ('m', 'м²'),
-            ('h', 'га')),
+            ('h', 'га'),
+            ('a', 'сотки')),
         default='m'
     )
 
