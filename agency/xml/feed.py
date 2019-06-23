@@ -108,7 +108,7 @@ def create_lot_offer(feed, instance):
     deal_status.text = 'прямая продажа'
     lot_area = ET.SubElement(offer, 'lot-area')
     lot_area_value = ET.SubElement(lot_area, 'value')
-    lot_area_value.text = str(instance.area.normalize())
+    lot_area_value.text = str(instance.area)
     lot_area_unit = ET.SubElement(lot_area, 'unit')
     if instance.area_units == 'm':
         lot_area_unit.text = 'кв. м'
