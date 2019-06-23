@@ -5,7 +5,6 @@ def add_lot_offer(instance):
     if instance.transaction_type == 'e':
         return
     try:
-        raise 'error'
         ET.register_namespace(
             '', 'http://webmaster.yandex.ru/schemas/feed/realty/2010-06')
         tree = ET.parse('feed.xml')
