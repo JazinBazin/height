@@ -1,3 +1,7 @@
 {% extends 'agency/pages/real_estate/real_estate_description.html' %}
 {% block unique_parameters %}
+<tr>
+    <td>Тип участка:</td>
+    <td>{{ real_estate.get_lot_type_display }}</td>
+</tr>
 {% endblock unique_parameters %}

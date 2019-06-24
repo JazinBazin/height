@@ -80,10 +80,24 @@
                         <td>{{ real_estate.populated_area.name }}</td>
                     </tr>
                     {% endif %}
+                    <tr>
+                        <td>Ипотека:</td>
+                        <td>{{ real_estate.get_mortgage_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>Торг:</td>
+                        <td>{{ real_estate.get_haggle_display }}</td>
+                    </tr>
                     {% if real_estate.documents %}
                     <tr>
                         <td>Документы:</td>
                         <td>{{ real_estate.documents }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if real_estate.cadastral_number %}
+                    <tr>
+                        <td>Кадастровый номер:</td>
+                        <td>{{ real_estate.cadastral_number }}</td>
                     </tr>
                     {% endif %}
                 </tbody>
