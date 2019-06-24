@@ -61,7 +61,9 @@ def create_lot_offer(feed, instance):
     transaction_type = ET.SubElement(offer, 'type')
     transaction_type.text = 'продажа' if instance.transaction_type == 'p' else 'аренда'
     property_type = ET.SubElement(offer, 'property-type')
-    property_type.text = 'участок'
+    property_type.text = 'жилая'
+    category = ET.SubElement(offer, 'category')
+    category.text = 'участок'
     lot_url = ET.SubElement(offer, 'url')
     lot_url.text = 'https://высота-крым.рф/' + \
         str(instance.pk) + 'land_description/'
