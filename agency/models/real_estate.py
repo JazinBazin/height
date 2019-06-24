@@ -145,12 +145,12 @@ class RealEstate(models.Model):
     #     default=True,
     # )
 
-    mortgage = models.BooleanField(
-        'Ипотека',
-        choices=((True, 'Да'),
-                 (False, 'Нет')),
-        default=True,
-    )
+    # mortgage = models.BooleanField(
+    #     'Ипотека',
+    #     choices=((True, 'Да'),
+    #              (False, 'Нет')),
+    #     default=True,
+    # )
 
     def __str__(self):
         return self.headline
