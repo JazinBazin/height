@@ -85,8 +85,9 @@ class RealEstateImageInline(admin.StackedInline):
 
 basic_required_fields = ('vendor_code', 'headline', 'image', 'description',
                          'district', 'populated_area', 'address', 'phone',
-                         'transaction_type', 'price', 'currency', 'area', 'area_units',)
-basic_optional_fields = ('documents',)
+                         'transaction_type', 'price', 'currency', 'area',
+                         'area_units', 'haggle', 'mortgage')
+basic_optional_fields = ('cadastral_number', 'documents',)
 basic_list_filters = (('status', admin.ChoicesFieldListFilter),
                       ('is_best_offer', admin.BooleanFieldListFilter),
                       ('transaction_type', admin.ChoicesFieldListFilter),
@@ -198,6 +199,20 @@ class HouseAdmin(RealEstateAdmin):
     )
 
 
+class LandAdmin(RealEstateAdmin):
+    list_filter = basic_list_filters + \
+        (('lot_type', admin.ChoicesFieldListFilter),)
+    fieldsets = (
+        (None, {
+            'fields': basic_required_fields + ('lot_type', 'status', 'is_best_offer',)
+        }),
+        ('Необязательные параметры', {
+            'classes': ('collapse',),
+            'fields': basic_optional_fields
+        }),
+    )
+
+
 class CommercialAdmin(RealEstateAdmin):
     list_filter = basic_list_filters + \
         (('commercial_type', admin.AllValuesFieldListFilter),
@@ -220,7 +235,7 @@ admin.site.register(models.RealEstateType, RealEstateTypeAdmin)
 admin.site.register(models.Advantage, AdvantageAdmin)
 admin.site.register(models.Apartment, ApartmentAdmin)
 admin.site.register(models.House, HouseAdmin)
-admin.site.register(models.Land, RealEstateAdmin)
+admin.site.register(models.Land, LandAdmin)
 admin.site.register(models.Garage, RealEstateAdmin)
 admin.site.register(models.Commercial, CommercialAdmin)
 admin.site.register(models.Contact, ContactAdmin)

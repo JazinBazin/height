@@ -146,7 +146,7 @@ class RealEstate(models.Model):
 
     mortgage = models.BooleanField(
         'Ипотека',
-        choices=((True, 'Да'),
+        choices=((True, 'Есть'),
                  (False, 'Нет')),
         default=True,
     )
