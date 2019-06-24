@@ -127,5 +127,8 @@ def create_lot_offer(feed, instance):
     # lot_type.text = 'ИЖС'
     lot_image = ET.SubElement(offer, 'image')
     lot_image.text = 'https://высота-крым.рф' + str(instance.image.url)
+    for photo in instance.images.all():
+        lot_image = ET.SubElement(offer, 'image')
+        lot_image.text = 'https://высота-крым.рф' + str(photo.image.url)
     description = ET.SubElement(offer, 'description')
     description.text = instance.description
