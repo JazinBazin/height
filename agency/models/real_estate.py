@@ -1,6 +1,7 @@
 from django.db import models
 from . import District, PopulatedArea
 
+
 class RealEstate(models.Model):
 
     class Meta:
@@ -128,6 +129,27 @@ class RealEstate(models.Model):
     creation_date = models.DateTimeField(
         'Дата создания объявления',
         auto_now_add=True
+    )
+
+    # cadastral_number = models.CharField(
+    #     'Кадастровый номер',
+    #     max_length=100,
+    #     null=True,
+    #     blank=True
+    # )
+
+    # haggle = models.BooleanField(
+    #     'Торг',
+    #     choices=((True, 'Да'),
+    #              (False, 'Нет')),
+    #     default=True,
+    # )
+
+    mortgage = models.BooleanField(
+        'Ипотека',
+        choices=((True, 'Да'),
+                 (False, 'Нет')),
+        default=True,
     )
 
     def __str__(self):
