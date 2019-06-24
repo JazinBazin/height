@@ -131,26 +131,25 @@ class RealEstate(models.Model):
         auto_now_add=True
     )
 
-    # cadastral_number = models.CharField(
-    #     'Кадастровый номер',
-    #     max_length=100,
-    #     null=True,
-    #     blank=True
-    # )
+    cadastral_number = models.CharField(
+        'Кадастровый номер',
+        max_length=100,
+        blank=True
+    )
 
-    # haggle = models.BooleanField(
-    #     'Торг',
-    #     choices=((True, 'Да'),
-    #              (False, 'Нет')),
-    #     default=True,
-    # )
+    haggle = models.BooleanField(
+        'Торг',
+        choices=((True, 'Да'),
+                 (False, 'Нет')),
+        default=True,
+    )
 
-    # mortgage = models.BooleanField(
-    #     'Ипотека',
-    #     choices=((True, 'Да'),
-    #              (False, 'Нет')),
-    #     default=True,
-    # )
+    mortgage = models.BooleanField(
+        'Ипотека',
+        choices=((True, 'Да'),
+                 (False, 'Нет')),
+        default=True,
+    )
 
     def __str__(self):
         return self.headline
