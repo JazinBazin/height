@@ -1,4 +1,5 @@
 {% load static %}
+<script src="{% static 'agency/js/tags.js' %}"></script>
 <div id="best-offers">
     <template v-if="bestOffers.length != 0">
         <h2 class="display-4 text-center mb-3">Лучшие предложения</h2>
@@ -28,8 +29,14 @@
                     <div class="ml-2 mr-2 mb-2 card-text">
                         <component v-bind:is="tabName" v-bind:ad="ad"></component>
                         <div class="row">
-                            <div class="col text-center">[[ Number.parseFloat(ad.area) ]] [[ ad.get_area_units_display
-                                ]]
+                            <div class="col text-center">
+                                [[ Number.parseFloat(ad.area) ]]
+                                <template v-if="ad.get_area_units_display=='сотки'">
+                                    [[ acres_display(ad.area) ]]
+                                </template>
+                                <template v-else>
+                                    [[ ad.get_area_units_display ]]
+                                </template>
                             </div>
                             <div class="col text-center">[[ ad.get_transaction_type_display ]]</div>
                         </div>

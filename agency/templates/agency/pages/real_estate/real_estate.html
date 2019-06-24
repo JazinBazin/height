@@ -29,7 +29,14 @@
             <div class="ml-2 mr-2 mb-2 card-text">
                 {% include unique_params_template %}
                 <div class="row">
-                    <div class="col text-center">{{ ad.area.normalize }} {{ ad.get_area_units_display }}</div>
+                    <div class="col text-center">
+                        {{ ad.area.normalize }}
+                        {% if ad.area_units == "a" %}
+                        {{ ad.area|acres_display }}
+                        {% else %}
+                        {{ ad.get_area_units_display }}
+                        {% endif %}
+                    </div>
                     <div class="col text-center">{{ ad.get_transaction_type_display }}</div>
                 </div>
             </div>
@@ -39,6 +46,7 @@
     {% endfor %}
 </div>
 {% endif %}
+<script src="{% static 'agency/js/tags.js' %}"></script>
 <div id="ads-list">
     <h2 class="display-4 text-center mb-3">{{ page_title }}</h2>
     {% include form_template with form=form %}
@@ -58,8 +66,14 @@
                 <div class="ml-2 mr-2 mb-2 card-text">
                     <component v-bind:is="uniqueParamsComponentName" v-bind:ad="ad"></component>
                     <div class="row">
-                        <div class="col text-center">[[ Number.parseFloat(ad.area) ]] [[ ad.get_area_units_display
-                            ]]
+                        <div class="col text-center">
+                            [[ Number.parseFloat(ad.area) ]]
+                            <template v-if="ad.get_area_units_display=='сотки'">
+                                [[ acres_display(ad.area) ]]
+                            </template>
+                            <template v-else>
+                                [[ ad.get_area_units_display ]]
+                            </template>
                         </div>
                         <div class="col text-center">[[ ad.get_transaction_type_display ]]</div>
                     </div>

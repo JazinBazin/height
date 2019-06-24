@@ -57,7 +57,14 @@
                     </tr>
                     <tr>
                         <td>Общая площадь:</td>
-                        <td>{{ real_estate.area.normalize }} {{ real_estate.get_area_units_display }}</td>
+                        <td>
+                            {{ real_estate.area.normalize }}
+                            {% if real_estate.area_units == "a" %}
+                            {{ real_estate.area|acres_display }}
+                            {% else %}
+                            {{ real_estate.get_area_units_display }}
+                            {% endif %}
+                        </td>
                     </tr>
                     {% block unique_parameters %}
                     {% endblock unique_parameters %}

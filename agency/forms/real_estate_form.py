@@ -71,6 +71,16 @@ class RealEstateFiltersForm(forms.Form):
         })
     )
 
+    # area_units = forms.ChoiceField(
+    #     label='Единицы площади:',
+    #     choices=(
+    #         ('m', 'м²'),
+    #         ('h', 'га'),
+    #         ('a', 'сотки')),
+    #     initial='m',
+    #     widget=forms.Select(attrs={'class': 'form-control'})
+    # )
+
     district = forms.ModelChoiceField(
         queryset=None,
         empty_label='Все',
