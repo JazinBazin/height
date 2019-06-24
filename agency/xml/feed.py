@@ -123,8 +123,20 @@ def create_lot_offer(feed, instance):
         lot_area_unit.text = 'гектар'
     else:
         lot_area_unit.text = 'cотка'
-    # lot_type = ET.SubElement(offer, 'lot-type')
-    # lot_type.text = 'ИЖС'
+    lot_type = ET.SubElement(offer, 'lot-type')
+    if instance.lot_type == 'i':
+        lot_type.text = 'ИЖС'
+    else:
+        lot_type.text = 'садоводство'
+    if instance.cadastral_number:
+        cadastral_number = ET.SubElement(offer, 'cadastral-number')
+        cadastral_number.text = instance.cadastral_number
+    haggle = ET.SubElement(offer, 'haggle')
+    haggle.text = 'да' if instance.mortgage == True else 'нет'
+    mortgage = ET.SubElement(offer, 'mortgage')
+    mortgage.text = 'да' if instance.mortgage == True else 'нет'
+    not_for_agents = ET.SubElement(offer, 'not-for-agents')
+    not_for_agents.text = 'да'
     lot_image = ET.SubElement(offer, 'image')
     lot_image.text = 'https://высота-крым.рф' + str(instance.image.url)
     for photo in instance.images.all():
