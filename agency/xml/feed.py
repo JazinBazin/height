@@ -40,6 +40,11 @@ def remove_lot_offer(pk):
         log_file.close()
 
 
+def update_lot_offer(instance):
+    remove_lot_offer(instance.pk)
+    add_lot_offer(instance)
+
+
 def change_feed_generation_date(feed):
     generation_date = feed.find(
         '{http://webmaster.yandex.ru/schemas/feed/realty/2010-06}generation-date')

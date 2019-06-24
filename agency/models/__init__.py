@@ -113,12 +113,12 @@ def real_estate_pre_save(sender, instance, **kwargs):
     old_image = old_object.image
 
     if instance.status == 'p':
+        if isinstance(instance, Land):
+            agency.xml.update_lot_offer(instance)
         if old_status == 'a':
             link = 'https://высота-крым.рф/' + \
                 str(instance.pk) + instance.description_page + '/'
             agency.xml.addUrlToSiteMap(link, instance.pk)
-            if isinstance(instance, Land):
-                agency.xml.add_lot_offer(instance)
     elif old_status == 'p':
         agency.xml.removeUrlFromSiteMap(instance.pk)
         if isinstance(instance, Land):

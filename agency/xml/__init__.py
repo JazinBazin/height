@@ -14,4 +14,4 @@ def escape_yrl(text):
 ET._escape_cdata = escape_yrl
 
 from .sitemap import addUrlToSiteMap, removeUrlFromSiteMap
-from .feed import add_lot_offer, remove_lot_offer
+from .feed import add_lot_offer, remove_lot_offer, update_lot_offer
