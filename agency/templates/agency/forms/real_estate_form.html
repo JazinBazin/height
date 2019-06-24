@@ -36,34 +36,41 @@
                     {{ form.area_to.errors }}
                     {{ form.area_to }}
                 </div>
-                <!-- <div class="col-auto">
-                    {{ form.area_units.errors }}
-                    {{ form.area_units }}
-                </div> -->
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-sm-6 col-md-4">
         <div class="mb-2">
-            <div class="form-row">
-                <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-2">
-                    {{ form.district.label }}
-                    {{ form.district.errors }}
-                    {{ form.district }}
-                </div>
-                <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-2">
-                    {{ form.populated_area.label }}
-                    {{ form.populated_area.errors }}
-                    {{ form.populated_area }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-12 col-sm-6 col-md-12">
-                    {{ form.transaction_type.label }}
-                    {{ form.transaction_type.errors }}
-                    {{ form.transaction_type }}
-                </div>
-            </div>
+            {{ form.district.label }}
+            {{ form.district.errors }}
+            {{ form.district }}
+        </div>
+        <div class="mb-2">
+            {{ form.populated_area.label }}
+            {{ form.populated_area.errors }}
+            {{ form.populated_area }}
         </div>
     </div>
 </div>
+<div class="form-row">
+    <div class="col-12 col-sm-6 col-md-4 mb-2">
+        {{ form.transaction_type.label }}
+        {{ form.transaction_type.errors }}
+        {{ form.transaction_type }}
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 mb-2">
+        {{ form.mortgage.label }}
+        {{ form.mortgage.errors }}
+        {{ form.mortgage }}
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 mb-2">
+        {{ form.haggle.label }}
+        {{ form.haggle.errors }}
+        {{ form.haggle }}
+    </div>
+</div>
+
+
+<!-- {{ form.transaction_type.label }}
+{{ form.transaction_type.errors }}
+{{ form.transaction_type }} -->

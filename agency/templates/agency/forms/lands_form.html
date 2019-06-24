@@ -2,5 +2,12 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% include 'agency/forms/real_estate_form.html' %}
+    <div class="form-row">
+        <div class="col-12 col-sm-6 col-md-4 mb-2">
+            {{ form.lot_type.label }}
+            {{ form.lot_type.errors }}
+            {{ form.lot_type }}
+        </div>
+    </div>
     {% include 'agency/forms/real_estate_form_buttons.html' %}
 </form>

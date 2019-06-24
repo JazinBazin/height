@@ -1,6 +1,5 @@
 from django import forms
 from django.db.models import Q
-from agency import models
 
 
 class RealEstateFiltersForm(forms.Form):
@@ -71,6 +70,26 @@ class RealEstateFiltersForm(forms.Form):
         })
     )
 
+    mortgage = forms.ChoiceField(
+        label='Ипотека:',
+        choices=(
+            ('a', 'Неважно'),
+            (True, 'Есть'),
+            (False, 'Нет')),
+        initial='a',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    haggle = forms.ChoiceField(
+        label='Торг:',
+        choices=(
+            ('a', 'Неважно'),
+            (True, 'Есть'),
+            (False, 'Нет')),
+        initial='a',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     # area_units = forms.ChoiceField(
     #     label='Единицы площади:',
     #     choices=(
@@ -117,6 +136,12 @@ class RealEstateFiltersForm(forms.Form):
         if self.cleaned_data['transaction_type'] != 'a':
             real_estate = real_estate.filter(
                 transaction_type=self.cleaned_data['transaction_type'])
+        if self.cleaned_data['mortgage'] != 'a':
+            real_estate = real_estate.filter(
+                mortgage=self.cleaned_data['mortgage'])
+        if self.cleaned_data['haggle'] != 'a':
+            real_estate = real_estate.filter(
+                haggle=self.cleaned_data['haggle'])
 
         district = self.cleaned_data['district']
         populated_area = self.cleaned_data['populated_area']

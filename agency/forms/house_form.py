@@ -64,7 +64,7 @@ class HouseForm(RealEstateFiltersForm):
     house_type = forms.ChoiceField(
         label='Тип жилья:',
         choices=(
-            ('a', 'Не важно'),
+            ('a', 'Неважно'),
             ('h', 'Дом'),
             ('c', 'Дача')),
         initial='a',

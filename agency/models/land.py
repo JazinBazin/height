@@ -16,6 +16,6 @@ class Land(RealEstate):
                  ('a', 'Сельхозназначения'),
                  ('g', 'Садоводство'),
                  ('l', 'ЛПХ')),
-        default='p',
+        default='i',
         db_index=True
     )

@@ -25,6 +25,22 @@ class LandForm(RealEstateFiltersForm):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 
+    lot_type = forms.ChoiceField(
+        label='Тип участка:',
+        choices=(('m', 'Любой'),
+                 ('i', 'ИЖС'),
+                 ('a', 'Сельхозназначения'),
+                 ('g', 'Садоводство'),
+                 ('l', 'ЛПХ')),
+        initial='n',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     def filter(self):
         lands = super().filter(models.Land)
+
+        if self.cleaned_data['lot_type'] != 'm':
+            lands = lands.filter(
+                lot_type=self.cleaned_data['lot_type'])
+
         return lands

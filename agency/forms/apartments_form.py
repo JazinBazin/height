@@ -82,7 +82,7 @@ class ApartmentsForm(RealEstateFiltersForm):
     balcony = forms.ChoiceField(
         label='Балкон:',
         choices=(
-            ('a', 'Не важно'),
+            ('a', 'Неважно'),
             (True, 'Есть'),
             (False, 'Нет')),
         initial='a',
@@ -92,7 +92,7 @@ class ApartmentsForm(RealEstateFiltersForm):
     bathroom = forms.ChoiceField(
         label='Санузел:',
         choices=(
-            ('a', 'Не важно'),
+            ('a', 'Неважно'),
             ('c', 'Совмещённый'),
             ('s', 'Раздельный')),
         initial='a',
