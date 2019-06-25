@@ -35,7 +35,7 @@ def remove_from_xml(sender, instance, **kwargs):
         agency.xml.removeUrlFromSiteMap(instance.pk)
         # Here only RealEstate model
         # change to receiver_with_multiple_senders and add "if isinstance(instance, Land):"
-        agency.xml.remove_lot_offer(instance.pk)
+        agency.xml.remove_from_all_feeds(instance.pk)
 
 
 models.signals.post_delete.connect(remove_from_xml, sender=RealEstate)
@@ -114,7 +114,7 @@ def real_estate_pre_save(sender, instance, **kwargs):
 
     if instance.status == 'p':
         if isinstance(instance, Land):
-            agency.xml.update_lot_offer(instance)
+            agency.xml.update_all_feeds(instance)
         if old_status == 'a':
             link = 'https://высота-крым.рф/' + \
                 str(instance.pk) + instance.description_page + '/'
@@ -122,7 +122,7 @@ def real_estate_pre_save(sender, instance, **kwargs):
     elif old_status == 'p':
         agency.xml.removeUrlFromSiteMap(instance.pk)
         if isinstance(instance, Land):
-            agency.xml.remove_lot_offer(instance.pk)
+            agency.xml.remove_from_all_feeds(instance.pk)
 
     if old_image != instance.image:
         if os.path.isfile(old_image.path):
@@ -143,4 +143,4 @@ def real_estate_post_save(sender, instance, created, **kwargs):
             str(instance.pk) + instance.description_page + '/'
         agency.xml.addUrlToSiteMap(link, instance.pk)
         if isinstance(instance, Land):
-            agency.xml.add_lot_offer(instance)
+            agency.xml.add_to_all_feeds(instance)

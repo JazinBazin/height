@@ -1,51 +1,68 @@
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from xml.sax.saxutils import escape
+
+yrl_escape_table = {
+    '"': "&quot;",
+    "'": "&apos;"
+}
+
+yandex_feed_file_name = 'feed_yandex.xml'
 
 
-def add_lot_offer(instance):
+def escape_yrl(text):
+    return escape(text, yrl_escape_table)
+
+
+def yandex_add_lot_offer(instance):
     if instance.transaction_type == 'e':
         return
+
+    ET_escape_cdata = ET._escape_cdata
+    ET._escape_cdata = escape_yrl
+
     try:
         ET.register_namespace(
             '', 'http://webmaster.yandex.ru/schemas/feed/realty/2010-06')
-        tree = ET.parse('feed.xml')
+        tree = ET.parse(yandex_feed_file_name)
         feed = tree.getroot()
-        change_feed_generation_date(feed)
-        create_lot_offer(feed, instance)
-        tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
-    except:
-        log_file = open('log.txt', 'a')
-        log_file.write('error in function add_lot_offer. pk = ' +
-                       str(instance.pk) + '\n')
-        log_file.close()
+        yandex_change_feed_generation_date(feed)
+        yandex_create_lot_offer(feed, instance)
+        tree.write(yandex_feed_file_name,
+                   encoding='UTF-8', xml_declaration=True)
+    except Exception as ex:
+        with open('log.txt', 'a') as log_file:
+            log_file.write('error in function yandex_add_lot_offer. pk = ' +
+                           str(instance.pk) + '\nwhat: ' + str(ex) + '\n')
+    finally:
+        ET._escape_cdata = ET_escape_cdata
 
 
-def remove_lot_offer(pk):
-    pk = str(pk)
+def yandex_remove_lot_offer(pk):
     try:
+        pk = str(pk)
         ET.register_namespace(
             '', 'http://webmaster.yandex.ru/schemas/feed/realty/2010-06')
-        tree = ET.parse('feed.xml')
+        tree = ET.parse(yandex_feed_file_name)
         feed = tree.getroot()
-        change_feed_generation_date(feed)
+        yandex_change_feed_generation_date(feed)
         for offer in feed:
             if offer.tag != '{http://webmaster.yandex.ru/schemas/feed/realty/2010-06}generation-date' and offer.get('internal-id', -1) == pk:
                 feed.remove(offer)
                 break
         tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
-    except:
-        log_file = open('log.txt', 'a')
-        log_file.write(
-            'error in function remove_lot_offer. pk = ' + str(pk) + '\n')
-        log_file.close()
+    except Exception as ex:
+        with open('log.txt', 'a') as log_file:
+            log_file.write('error in function yandex_remove_lot_offer. pk = ' +
+                           str(pk) + '\nwhat: ' + str(ex) + '\n')
 
 
-def update_lot_offer(instance):
-    remove_lot_offer(instance.pk)
-    add_lot_offer(instance)
+def yandex_update_lot_offer(instance):
+    yandex_remove_lot_offer(instance.pk)
+    yandex_add_lot_offer(instance)
 
 
-def change_feed_generation_date(feed):
+def yandex_change_feed_generation_date(feed):
     generation_date = feed.find(
         '{http://webmaster.yandex.ru/schemas/feed/realty/2010-06}generation-date')
     if generation_date is not None:
@@ -58,7 +75,7 @@ def change_feed_generation_date(feed):
         feed.insert(0, generation_date)
 
 
-def create_lot_offer(feed, instance):
+def yandex_create_lot_offer(feed, instance):
     offer = ET.Element('offer', attrib={
         'internal-id': str(instance.pk),
     })
@@ -85,7 +102,7 @@ def create_lot_offer(feed, instance):
     creation_date = ET.SubElement(offer, 'creation-date')
     creation_date.text = datetime.now().replace(
         microsecond=0).isoformat(sep='T') + '+03:00'
-        
+
     location = ET.SubElement(offer, 'location')
 
     country = ET.SubElement(location, 'country')
@@ -162,7 +179,7 @@ def create_lot_offer(feed, instance):
 
     if instance.cadastral_number:
         cadastral_number = ET.SubElement(offer, 'cadastral-number')
-        cadastral_number.text = instance.cadastral_number
+        cadastral_number.text = str(instance.cadastral_number)
 
     haggle = ET.SubElement(offer, 'haggle')
     haggle.text = 'да' if instance.mortgage == True else 'нет'
@@ -179,6 +196,6 @@ def create_lot_offer(feed, instance):
     for photo in instance.images.all():
         lot_image = ET.SubElement(offer, 'image')
         lot_image.text = 'https://высота-крым.рф' + str(photo.image.url)
-        
+
     description = ET.SubElement(offer, 'description')
-    description.text = instance.description
+    description.text = str(instance.description)
