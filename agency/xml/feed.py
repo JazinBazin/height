@@ -63,47 +63,73 @@ def create_lot_offer(feed, instance):
         'internal-id': str(instance.pk),
     })
     feed.append(offer)
+
     transaction_type = ET.SubElement(offer, 'type')
-    transaction_type.text = 'продажа' if instance.transaction_type == 'p' else 'аренда'
+    if instance.transaction_type == 'p':
+        transaction_type.text = 'продажа'
+    else:
+        transaction_type.text = 'аренда'
+        rent_period = ET.SubElement(offer, 'period')
+        rent_period.text = 'месяц'
+
     property_type = ET.SubElement(offer, 'property-type')
     property_type.text = 'жилая'
+
     category = ET.SubElement(offer, 'category')
     category.text = 'участок'
+
     lot_url = ET.SubElement(offer, 'url')
     lot_url.text = 'https://высота-крым.рф/' + \
         str(instance.pk) + 'land_description/'
+
     creation_date = ET.SubElement(offer, 'creation-date')
     creation_date.text = datetime.now().replace(
         microsecond=0).isoformat(sep='T') + '+03:00'
+        
     location = ET.SubElement(offer, 'location')
+
     country = ET.SubElement(location, 'country')
     country.text = 'Россия'
+
     region = ET.SubElement(location, 'region')
     region.text = 'Республика Крым'
+
     if instance.district:
         district = ET.SubElement(location, 'district')
         district.text = str(instance.district)
+
     if instance.populated_area:
         locality_name = ET.SubElement(location, 'locality-name')
         locality_name.text = str(instance.populated_area)
+
     sales_agent = ET.SubElement(offer, 'sales-agent')
+
     agent_name = ET.SubElement(sales_agent, 'name')
     agent_name.text = 'Юденич Светлана Станиславовна'
+
     agent_phone = ET.SubElement(sales_agent, 'phone')
     agent_phone.text = '+79788343176'
+
     agent_category = ET.SubElement(sales_agent, 'category')
     agent_category.text = 'агентство'
+
     agent_organization = ET.SubElement(sales_agent, 'organization')
     agent_organization.text = 'Высота'
+
     agent_url = ET.SubElement(sales_agent, 'url')
     agent_url.text = 'https://высота-крым.рф'
+
     agent_email = ET.SubElement(sales_agent, 'email')
     agent_email.text = 'visota-agency@rambler.ru'
+
     agent_photo = ET.SubElement(sales_agent, 'photo')
     agent_photo.text = 'https://высота-крым.рф/static/agency/images/favicon32x32.ico'
+
     price = ET.SubElement(offer, 'price')
+
     price_value = ET.SubElement(price, 'value')
     price_value.text = str(instance.price)
+
     price_currency = ET.SubElement(price, 'currency')
     if instance.currency == 'r':
         price_currency.text = 'RUR'
@@ -111,11 +137,15 @@ def create_lot_offer(feed, instance):
         price_currency.text = 'USD'
     else:
         price_currency.text = 'EUR'
+
     deal_status = ET.SubElement(offer, 'deal-status')
     deal_status.text = 'прямая продажа'
+
     lot_area = ET.SubElement(offer, 'lot-area')
+
     lot_area_value = ET.SubElement(lot_area, 'value')
     lot_area_value.text = str(instance.area)
+
     lot_area_unit = ET.SubElement(lot_area, 'unit')
     if instance.area_units == 'm':
         lot_area_unit.text = 'кв. м'
@@ -123,24 +153,32 @@ def create_lot_offer(feed, instance):
         lot_area_unit.text = 'гектар'
     else:
         lot_area_unit.text = 'cотка'
+
     lot_type = ET.SubElement(offer, 'lot-type')
     if instance.lot_type == 'i':
         lot_type.text = 'ИЖС'
     else:
         lot_type.text = 'садоводство'
+
     if instance.cadastral_number:
         cadastral_number = ET.SubElement(offer, 'cadastral-number')
         cadastral_number.text = instance.cadastral_number
+
     haggle = ET.SubElement(offer, 'haggle')
     haggle.text = 'да' if instance.mortgage == True else 'нет'
+
     mortgage = ET.SubElement(offer, 'mortgage')
     mortgage.text = 'да' if instance.mortgage == True else 'нет'
+
     not_for_agents = ET.SubElement(offer, 'not-for-agents')
     not_for_agents.text = 'да'
+
     lot_image = ET.SubElement(offer, 'image')
     lot_image.text = 'https://высота-крым.рф' + str(instance.image.url)
+
     for photo in instance.images.all():
         lot_image = ET.SubElement(offer, 'image')
         lot_image.text = 'https://высота-крым.рф' + str(photo.image.url)
+        
     description = ET.SubElement(offer, 'description')
     description.text = instance.description
