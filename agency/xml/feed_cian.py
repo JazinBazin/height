@@ -76,7 +76,7 @@ def cian_create_lot_offer(feed, instance):
     CountryCode = ET.SubElement(PhoneSchema, 'CountryCode')
     CountryCode.text = '+7'
 
-    phone_number = ET.SubElement(PhoneSchema, 'CountryCode')
+    phone_number = ET.SubElement(PhoneSchema, 'Number')
     phone_number.text = '9788343176'
 
     SubAgent = ET.SubElement(ad_object, 'SubAgent')
