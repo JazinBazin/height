@@ -123,7 +123,7 @@ def create_lot_offer(feed, instance):
     agent_email.text = 'visota-agency@rambler.ru'
 
     agent_photo = ET.SubElement(sales_agent, 'photo')
-    agent_photo.text = 'https://высота-крым.рф/static/agency/images/favicon32x32.ico'
+    agent_photo.text = 'https://высота-крым.рф/static/agency/images/logo.png'
 
     price = ET.SubElement(offer, 'price')
 
