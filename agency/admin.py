@@ -152,9 +152,11 @@ class RealEstateAdmin(admin.ModelAdmin):
     remove_from_best_offers.short_description = 'Удалить из \"Лучших предложений\"'
 
     def save_model(self, request, obj, form, change):
-        obj.save()
+        # obj.save() должен вызываться после сохранения изображений
+        # для внесения их в feed файлы
         for afile in request.FILES.getlist('multiple_images'):
             obj.images.create(image=afile)
+        obj.save()
 
 
 class ApartmentAdmin(RealEstateAdmin):

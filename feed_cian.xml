@@ -1,0 +1,46 @@
+<feed>
+    <feed_version>2</feed_version>
+    <object>
+        <ExternalId>39</ExternalId>
+        <Description>67gfdhfgh</Description>
+        <Address>Россия, Республика Крым, Сакский район, Саки</Address>
+        <Phones>
+            <PhoneSchema>
+                <CountryCode>+7</CountryCode>
+                <CountryCode>9788343176</CountryCode>
+            </PhoneSchema>
+        </Phones>
+        <SubAgent>
+            <Email>visota-agency@rambler.ru</Email>
+            <Phone>+7 (978) 834-31-76</Phone>
+            <FirstName>Светлана</FirstName>
+            <LastName>Юденич</LastName>
+            <AvatarUrl>https://высота-крым.рф/static/agency/images/logo.png</AvatarUrl>
+        </SubAgent>
+        <LayoutPhoto>
+            <FullUrl>https://высота-крым.рф/media/agency/images/real_estate_titles/live-chat_icon-icons.com_52831.png</FullUrl>
+            <IsDefault>true</IsDefault>
+        </LayoutPhoto>
+        <Photos>
+            <PhotoSchema>
+                <FullUrl>https://высота-крым.рф/media/agency/images/real_estate_images/construction_project_plan_building_architect_design_dev_1NPaKJH.png</FullUrl>
+                <IsDefault>false</IsDefault>
+            </PhotoSchema>
+            <PhotoSchema>
+                <FullUrl>https://высота-крым.рф/media/agency/images/real_estate_images/apartment_icon-icons.com_48363.png</FullUrl>
+                <IsDefault>false</IsDefault>
+            </PhotoSchema>
+        </Photos>
+        <Title>Саки2 Саки2</Title>
+        <Category>landSale</Category>
+        <Land>
+            <Area>12.000000</Area>
+            <AreaUnitType>sotka</AreaUnitType>
+            <Status>gardening</Status>
+        </Land>
+        <BargainTerms>
+            <Price>12</Price>
+            <Currency>rur</Currency>
+        </BargainTerms>
+    </object>
+</feed>
