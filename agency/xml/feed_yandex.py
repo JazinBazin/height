@@ -50,7 +50,7 @@ def yandex_remove_lot_offer(pk):
             if offer.tag != '{http://webmaster.yandex.ru/schemas/feed/realty/2010-06}generation-date' and offer.get('internal-id', -1) == pk:
                 feed.remove(offer)
                 break
-        tree.write('feed.xml', encoding='UTF-8', xml_declaration=True)
+        tree.write(yandex_feed_file_name, encoding='UTF-8', xml_declaration=True)
     except Exception as ex:
         with open('log.txt', 'a') as log_file:
             log_file.write('error in function yandex_remove_lot_offer. pk = ' +
