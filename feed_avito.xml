@@ -1,0 +1,23 @@
+<Ads formatVersion="3" target="Avito.ru">
+    <Ad>
+        <Id>28</Id>
+        <AllowEmail>Да</AllowEmail>
+        <ManagerName>Юденич Светлана Станиславовна</ManagerName>
+        <ContactPhone>+7 (978) 834-31-76</ContactPhone>
+        <Address>Россия, Крым, Сакский район, Владимировка</Address>
+        <DistanceToCity>0</DistanceToCity>
+        <Description>811256р</Description>
+        <Category>Земельные участки</Category>
+        <OperationType>Продам</OperationType>
+        <Price>50</Price>
+        <LandArea>8</LandArea>
+        <PropertyRights>Собственник</PropertyRights>
+        <CadastralNumber>90:11:150501:3568</CadastralNumber>
+        <ObjectType>Сельхозназначения (СНТ, ДНП)</ObjectType>
+        <Images>
+            <Image url="https://высота-крым.рф/media/agency/images/real_estate_titles/4936faed207a812f1ac1033c2746ea47.jpg" />
+            <Image url="https://высота-крым.рф/media/agency/images/real_estate_images/house-1407562_1920.jpg" />
+            <Image url="https://высота-крым.рф/media/agency/images/real_estate_images/house-1353389_1920.jpg" />
+        </Images>
+    </Ad>
+</Ads>
