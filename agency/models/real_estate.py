@@ -74,17 +74,17 @@ class RealEstate(models.Model):
         null=True
     )
 
-    street = models.CharField(
-        'Улица (Яндекс)',
-        max_length=100,
-        blank=True
-    )
+    # street = models.CharField(
+    #     'Улица (Яндекс)',
+    #     max_length=100,
+    #     blank=True
+    # )
 
-    house_number = models.CharField(
-        'Номер дома (Яндекс)',
-        max_length=100,
-        blank=True        
-    )
+    # house_number = models.CharField(
+    #     'Номер дома (Яндекс)',
+    #     max_length=100,
+    #     blank=True        
+    # )
 
     address = models.CharField(
         'Адрес',

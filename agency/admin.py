@@ -84,7 +84,7 @@ class RealEstateImageInline(admin.StackedInline):
 
 
 basic_required_fields = ('vendor_code', 'headline', 'image', 'description',
-                         'district', 'populated_area', 'street', 'house_number',
+                         'district', 'populated_area',
                          'address', 'phone', 'transaction_type', 'price', 'currency',
                          'area', 'area_units')
 basic_optional_fields = ('cadastral_number', 'documents',)
