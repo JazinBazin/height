@@ -91,7 +91,7 @@ def avito_create_lot_offer(feed, instance):
     if instance.area_units == 'm':
         LandArea.text = str(int(instance.area / 100))
     elif instance.area_units == 'h':
-        LandArea.text = str(int(instance.area / 10000))
+        LandArea.text = str(int(instance.area * 100))
     else:
         LandArea.text = str(int(instance.area))
 
