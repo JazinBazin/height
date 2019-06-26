@@ -84,9 +84,9 @@ class RealEstateImageInline(admin.StackedInline):
 
 
 basic_required_fields = ('vendor_code', 'headline', 'image', 'description',
-                         'district', 'populated_area', 'address', 'phone',
-                         'transaction_type', 'price', 'currency', 'area',
-                         'area_units', 'haggle', 'mortgage')
+                         'district', 'populated_area', 'street', 'house_number',
+                         'address', 'phone', 'transaction_type', 'price', 'currency',
+                         'area', 'area_units')
 basic_optional_fields = ('cadastral_number', 'documents',)
 basic_list_filters = (('status', admin.ChoicesFieldListFilter),
                       ('is_best_offer', admin.BooleanFieldListFilter),
@@ -119,7 +119,7 @@ class RealEstateAdmin(admin.ModelAdmin):
     list_editable = ['status', 'is_best_offer']
     fieldsets = (
         (None, {
-            'fields': basic_required_fields + ('status', 'is_best_offer',)
+            'fields': basic_required_fields + ('haggle', 'mortgage', 'status', 'is_best_offer',)
         }),
         ('Необязательные параметры', {
             'classes': ('collapse',),
@@ -172,7 +172,7 @@ class ApartmentAdmin(RealEstateAdmin):
         (None, {
             'fields': basic_required_fields +
             ('number_of_rooms', 'floor_number', 'number_of_floors',
-             'balcony', 'bathroom', 'status', 'is_best_offer',),
+             'balcony', 'bathroom', 'haggle', 'mortgage', 'status', 'is_best_offer',),
         }),
         ('Необязательные параметры', {
             'classes': ('collapse',),
@@ -192,7 +192,7 @@ class HouseAdmin(RealEstateAdmin):
         (None, {
             'fields': basic_required_fields +
             ('house_type', 'number_of_floors',
-             'number_of_rooms', 'status', 'is_best_offer',)
+             'number_of_rooms', 'haggle', 'mortgage', 'status', 'is_best_offer',)
         }),
         ('Необязательные параметры', {
             'classes': ('collapse',),
@@ -206,7 +206,7 @@ class LandAdmin(RealEstateAdmin):
         (('lot_type', admin.ChoicesFieldListFilter),)
     fieldsets = (
         (None, {
-            'fields': basic_required_fields + ('lot_type', 'status', 'is_best_offer',)
+            'fields': basic_required_fields + ('lot_type', 'haggle', 'mortgage', 'status', 'is_best_offer',)
         }),
         ('Необязательные параметры', {
             'classes': ('collapse',),

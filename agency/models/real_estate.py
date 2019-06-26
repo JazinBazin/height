@@ -69,10 +69,21 @@ class RealEstate(models.Model):
 
     populated_area = models.ForeignKey(
         PopulatedArea,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.PROTECT,
         verbose_name='Населённый пункт',
+        null=True
+    )
+
+    street = models.CharField(
+        'Улица (Яндекс)',
+        max_length=100,
+        blank=True
+    )
+
+    house_number = models.CharField(
+        'Номер дома (Яндекс)',
+        max_length=100,
+        blank=True        
     )
 
     address = models.CharField(
