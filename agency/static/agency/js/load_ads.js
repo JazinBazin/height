@@ -84,7 +84,11 @@ Vue.component('house', {
 
 Vue.component('land', {
     props: ['ad'],
-    template: ''
+    template: '\
+            <div class="row">\
+            <div class="col text-center">{{ ad.get_lot_type_display }}</div>\
+            </div>\
+            '
 })
 
 Vue.component('garage', {

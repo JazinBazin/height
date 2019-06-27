@@ -21,7 +21,7 @@ class HouseSerializer(serializers.ModelSerializer):
 class LandSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Land
-        fields = base_fields
+        fields = base_fields + ['get_lot_type_display']
 
 
 class GarageSerializer(serializers.ModelSerializer):
