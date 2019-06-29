@@ -107,19 +107,19 @@ class ApartmentsForm(RealEstateFiltersForm):
                 number_of_rooms__gte=self.cleaned_data['rooms_from'])
         if self.cleaned_data['rooms_to']:
             apartments = apartments.filter(
-                number_of_rooms__lt=self.cleaned_data['rooms_to'])
+                number_of_rooms__lte=self.cleaned_data['rooms_to'])
         if self.cleaned_data['floor_number_from']:
             apartments = apartments.filter(
                 floor_number__gte=self.cleaned_data['floor_number_from'])
         if self.cleaned_data['floor_number_to']:
             apartments = apartments.filter(
-                floor_number__lt=self.cleaned_data['floor_number_to'])
+                floor_number__lte=self.cleaned_data['floor_number_to'])
         if self.cleaned_data['floors_count_from']:
             apartments = apartments.filter(
                 number_of_floors__gte=self.cleaned_data['floors_count_from'])
         if self.cleaned_data['floors_count_to']:
             apartments = apartments.filter(
-                number_of_floors__lt=self.cleaned_data['floors_count_to'])
+                number_of_floors__lte=self.cleaned_data['floors_count_to'])
         if self.cleaned_data['balcony'] != 'a':
             apartments = apartments.filter(
                 balcony=self.cleaned_data['balcony'])

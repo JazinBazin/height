@@ -79,13 +79,13 @@ class HouseForm(RealEstateFiltersForm):
                 number_of_rooms__gte=self.cleaned_data['rooms_from'])
         if self.cleaned_data['rooms_to']:
             houses = houses.filter(
-                number_of_rooms__lt=self.cleaned_data['rooms_to'])
+                number_of_rooms__lte=self.cleaned_data['rooms_to'])
         if self.cleaned_data['floors_count_from']:
             houses = houses.filter(
                 number_of_floors__gte=self.cleaned_data['floors_count_from'])
         if self.cleaned_data['floors_count_to']:
             houses = houses.filter(
-                number_of_floors__lt=self.cleaned_data['floors_count_to'])
+                number_of_floors__lte=self.cleaned_data['floors_count_to'])
         if self.cleaned_data['house_type'] != 'a':
             houses = houses.filter(
                 house_type=self.cleaned_data['house_type'])

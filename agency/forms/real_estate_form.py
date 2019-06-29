@@ -126,13 +126,13 @@ class RealEstateFiltersForm(forms.Form):
                 price__gte=self.cleaned_data['price_from'])
         if self.cleaned_data['price_to']:
             real_estate = real_estate.filter(
-                price__lt=self.cleaned_data['price_to'])
+                price__lte=self.cleaned_data['price_to'])
         if self.cleaned_data['area_from']:
             real_estate = real_estate.filter(
                 area__gte=self.cleaned_data['area_from'])
         if self.cleaned_data['area_to']:
             real_estate = real_estate.filter(
-                area__lt=self.cleaned_data['area_to'])
+                area__lte=self.cleaned_data['area_to'])
         if self.cleaned_data['transaction_type'] != 'a':
             real_estate = real_estate.filter(
                 transaction_type=self.cleaned_data['transaction_type'])
